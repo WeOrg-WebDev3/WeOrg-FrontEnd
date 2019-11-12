@@ -1,31 +1,41 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
+import Home from '../components/Home'
+import login from '../components/Login'
+import SignUp from '../components/SignUp'
+import About from '../components/About'
+// import SearchBar from '../components/searchBar'
 
-import Home from '../views/Home.vue'
-import About from '../views/About.vue'
+Vue.use(Router)
 
+export default new Router({
+  mode: 'history',
 
+  routes: [
+    { 
+      path: '/', 
+      component: Home
+    },
+    { 
+      path: '/About', 
+      component: About
+    },
 
-Vue.use(VueRouter)
+    {
+      path: '/login',
+      component: login,
+      props: (route) => ({ name: route.query.name })
+    },
 
-const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home
-  },
-  
-  {
-    path: '/About',
-    name: 'About',
-    component: About
-  },
-  
- 
-]
-
-const router = new VueRouter({
-  routes
+    {
+      path: '/signup',
+      component: SignUp,
+      props: (route) => ({ name: route.query.name })
+    },
+    // {
+    //   path: '/personalinfo',
+    //   component: PersonalInfo,
+    //   props: (route) => ({ name: route.query.name })
+    // }
+  ]
 })
-
-export default router
