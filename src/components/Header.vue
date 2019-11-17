@@ -1,164 +1,69 @@
 <template>
-  <div class="head">
-    <h1>WeOrg!</h1>
+<div id="navtop">
+  <b-navbar type="dark" variant="dark">
+    <b-navbar-nav>
+       <router-link class="li1" to="/" tag="div">Home</router-link>
+      <router-link class="li2" to="/About" tag="div">About</router-link>
+      <b-nav-item-dropdown text="Categories" right class="dpd">
+        <b-dropdown-item  to="/Burial">Burial</b-dropdown-item>
+        <b-dropdown-item to="/Birthday">Birthday</b-dropdown-item>
+         <b-dropdown-item  to="/Baptist">Baptist</b-dropdown-item>
+          <b-dropdown-item  to="/Wedding">Wedding</b-dropdown-item>
+      </b-nav-item-dropdown>
+    </b-navbar-nav>
+    <b-nav-form class="search">
     
-    <router-link class="navBtn" to="/Login" tag="div">Login</router-link>
-      <router-link class="navBtn" to="/SignUp" tag="div">SignUp</router-link>
-    <span class="fa fa-star checked" id="st1"></span>
-    <span class="fa fa-star checked" id="st2"></span>
-    <span class="fa fa-star checked" id="st3"></span>
-    <div class="topnav">
-      <router-link class="navBtn" to="/" tag="div">Home</router-link>
-      <router-link class="navBtn" :to="'/About'" tag="div">About</router-link>
-      
-       <router-link class="navBtn" to="/" tag="div">Organizers</router-link>
     
-     
-      <input type="text" placeholder="Search..">
-      <i class="fa fa-search searchI"></i>
-    
-    </div>
-  </div>
+      <b-form-input class="mr-sm-2" placeholder="Search"></b-form-input>
+      <b-button variant="outline-success" class="my-2 my-sm-0" type="submit" c>Search</b-button>
+    </b-nav-form>
+  </b-navbar>
+  
+</div>
 </template>
+
 <script>
 export default {
-  name: "my",
+  name: 'Header',
   props: {
     msg: String
   }
-};
+}
 </script>
-<style>
-.topnav {
-  overflow: hidden;
-  background-color: #e9e9e9;
-  width: 75%;
-  margin-left: 15%;
-  padding: 4px;
-  margin-top: 8%;
-}
-/* Style the links inside the navigation bar */
-.navBtn {
-  float: left;
-  display: block;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
 
-.topnav .navBtn:hover {
-  background-color:gray;
-  color:black
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+h3 {
+  margin: 40px 0 0;
 }
-/* Style the "active" element to highlight the current page
-.topnav .navBtn.active {
-  background-color: #2196f3;
-  color: rgb(255, 255, 255);
-} */
-/* Style the search box inside the navigation bar */
-.topnav input[type="text"] {
-  float: left;
-  padding: 6px;
-  border: none;
-  margin-top: 8px;
-  margin-left: 5%;
-  font-size: 17px;
-  width: 50%;
+.navtop{
+  width:50%;
+  margin-left:25%;
+  margin-right:25%
 }
-/* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
-@media screen and (max-width: 200px) {
-  .topnav a,
-  .topnav input[type="text"] {
-    float: none;
-    display: block;
-    text-align: left;
-    width: 100%;
-    margin: 0;
-    padding: 14px;
-  }
-  .topnav input[type="text"] {
-    border: 1px solid #ccc;
-  }
+.li1 {
+ margin-top: 7px;
+  margin-left:200%;
+  color:white
 }
-.head {
-  padding: 45px;
-  background: #1a7bbc;
-  color: white;
-  font-size: 30px;
-}
-h1 {
-  float: left;
-  margin-top: -20px;
-  color: black;
-}
-.checked {
-  color: orange;
-}
-i {
-  color: black;
-  position: relative;
-  margin-bottom: 15px;
-  margin-top: 8px;
-  margin-left: -30px;
-}
-#st1 {
-  float: left;
-  margin-left: -175px;
-  margin-top: 60px;
-}
-#st2 {
-  float: left;
-  margin-left: -125px;
-  margin-top: 60px;
-}
-#st3 {
-  float: left;
-  margin-left: -75px;
-  margin-top: 60px;
-}
-li {
-  float: left;
-}
-li a,
-.dropbtn {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-li a:hover,
-.dropdown:hover .dropbtn {
-  background-color: red;
-}
-li.dropdown {
-  display: inline-block;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-img {
-  widows: 10px;
-}
+.li2 {
+ margin-top: 8px;
+  margin-left:20%;
+  color:white}
+.li2:hover {
+  color:blue
 
+}
+.li1:hover {
+  color:blue
+
+}
+  
+.dpd{
+  margin-left:20%
+  
+}
+.search {
+  margin-left:37%
+}
 </style>
