@@ -24,7 +24,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -37,11 +37,11 @@ export default {
 .navBtn1 {
   color:black;
   position:relative;
-  float:right;
-  margin-right:10%
+ 
+  margin-left: 90%
 }
 .navBtn2 {
-  margin-left:75%;
+  margin-left:90%;
   color:black;
   position:relative;
   }

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../views/Home'
-import login from '../views/Login'
+import Login from '../views/Login'
 import Signup from '../views/Signup'
 import About from '../views/About'
 import Burial from '../views/Burial'
@@ -32,7 +32,7 @@ export default new Router({
 
     {
       path: '/Login',
-      component: login,
+      component: Login,
       props: (route) => ({ name: route.query.name })
     },
     {
