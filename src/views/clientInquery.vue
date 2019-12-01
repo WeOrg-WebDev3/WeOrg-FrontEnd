@@ -17,29 +17,11 @@
                       <v-text-field v-model="name" :rules="nameRules" label="Name" required></v-text-field>
                       <v-text-field v-model="address" :rules="nameRules" label="Address" required></v-text-field>
                       <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-                      <v-text-field
-                        v-model="password"
-                        :rules="passwordRules"
-                        label="Password"
-                        type="password"
-                        required
-                      ></v-text-field>
-                      <v-text-field
-                        v-model="contact"
-                        :rules="numberRules"
-                        label="Contact Number"
-                        type="number"
-                        min="0"
-                        required
-                      ></v-text-field>
+                      <v-text-field v-model="password" :rules="passwordRules" label="Password" type="password" required ></v-text-field>
+                      <v-text-field v-model="contact" :rules="numberRules" label="Contact Number" type="number" min="0" required></v-text-field>
                       <v-select v-model="event" :items="items" filled label="Events" outlined></v-select>
                       <v-text-field v-model="price" label="Price" type="number" min="1" required></v-text-field>
-                      <v-text-field
-                        v-model="packages"
-                        :rules="packageRules"
-                        label="Package"
-                        required
-                      ></v-text-field>
+                      <v-text-field v-model="packages" :rules="packageRules" label="Package" required></v-text-field>
                       <v-text-field v-model="photo" label="Photo" type="file" required></v-text-field>
                     </v-form>
                   </template>
@@ -116,40 +98,40 @@ export default {
     ]
   }),
 
-  methods: {
-    submit() {
-      if (
-        this.name != "" &&
-        this.address != "" &&
-        this.email != "" &&
-        this.password != "" &&
-        this.contact != "" &&
-        this.event != "" &&
-        this.price != "" &&
-        this.packages != ""
-      ) {
-        console.log(this.address);
-        this.axios
-          .post("http://localhost:8002/account", {
-            name: this.name,
-            address: this.address,
-            email: this.email,
-            password: this.password,
-            contact: this.contact,
-            event: this.event,
-            price: this.price,
-            packages: this.packages
-          })
-          .then(response => {
-            this.$router.push({ path: "Login" });
-            console.log(response);
-          });
-      } else {
-        alert("Input Field must be Filled up.");
+//   methods: {
+//     submit() {
+//       if (
+//         this.name != "" &&
+//         this.address != "" &&
+//         this.email != "" &&
+//         this.password != "" &&
+//         this.contact != "" &&
+//         this.event != "" &&
+//         this.price != "" &&
+//         this.packages != ""
+//       ) {
+//         console.log(this.address);
+//         this.axios
+//           .post("http://localhost:8001/account", {
+//             name: this.name,
+//             address: this.address,
+//             email: this.email,
+//             password: this.password,
+//             contact: this.contact,
+//             event: this.event,
+//             price: this.price,
+//             packages: this.packages
+//           })
+//           .then(response => {
+//             this.$router.push({ path: "Login" });
+//             console.log(response);
+//           });
+//       } else {
+//         alert("Input Field must be Filled up.");
         
-      }
-    }
-  }
+//       }
+//     }
+//   }
 };
 </script>
 <style scoped>

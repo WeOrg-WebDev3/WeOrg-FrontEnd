@@ -1,69 +1,84 @@
 <template>
-<div id="navtop">
-  <b-navbar type="dark" variant="dark">
-    <b-navbar-nav>
-       <router-link class="li1" to="/" tag="div">Home</router-link>
-      <router-link class="li2" to="/About" tag="div">About</router-link>
-      <b-nav-item-dropdown text="Categories" right class="dpd">
-        <b-dropdown-item  to="/Burial">Burial</b-dropdown-item>
-        <b-dropdown-item to="/Birthday">Birthday</b-dropdown-item>
-         <b-dropdown-item  to="/Baptist">Baptist</b-dropdown-item>
-          <b-dropdown-item  to="/Wedding">Wedding</b-dropdown-item>
-      </b-nav-item-dropdown>
-    </b-navbar-nav>
-    <b-nav-form class="search">
+  <div>
+    <v-system-bar color="#0065FFB6" height="150%"></v-system-bar>
+     
+        
+     
+    <!-- <v-app-bar color="grey" dark prominent>
+    <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>-->
+
+    <v-spacer></v-spacer>
     
-    
-      <b-form-input class="mr-sm-2" placeholder="Search"></b-form-input>
-      <b-button variant="outline-success" class="my-2 my-sm-0" type="submit" c>Search</b-button>
-    </b-nav-form>
-  </b-navbar>
-  
-</div>
+
+    <!-- </v-app-bar> -->
+
+    <!--  -->
+
+     
+ </div>
 </template>
 
+   
 <script>
 export default {
-  name: 'Header',
-  props: {
-    msg: String
+  name: "Sidebar",
+
+  // computed: {
+  //   color () {
+  //     switch (this.bottomNav) {
+  //       case 0: return 'blue-grey'
+  //       case 1: return 'teal'
+  //       case 2: return 'brown'
+  //       case 3: return 'indigo'
+  //     }
+  //   },
+  // },
+  
   }
-}
+  // },
+  // data: () => ({
+  //   drawer: false,
+  //   group: null,
+  //   items: [
+  //     {
+  //       title: "Birthday",
+  //       to: "/Birthday "
+  //     },
+  //     {
+  //       title: "Burial",
+  //       to: "/Burial"
+  //     },
+  //     {
+  //       title: "Baptist",
+  //       to: "/Baptist"
+  //     },
+  //     {
+  //       title: "Wedding",
+  //       to: "/Wedding"
+  //     }
+  //   ]
+  // }),
+  // methods:{
+  //   search(){
+  //     axios.get
+  //   }
+  // },
+  // watch: {
+  //   group() {
+  //     this.drawer = false;
+  //   }
+  // }
+
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+li {
+  display: block;
 }
-.navtop{
-  width:50%;
-  margin-left:25%;
-  margin-right:25%
-}
-.li1 {
- margin-top: 7px;
-  margin-left:200%;
-  color:white
-}
-.li2 {
- margin-top: 8px;
-  margin-left:20%;
-  color:white}
-.li2:hover {
-  color:blue
 
-}
-.li1:hover {
-  color:blue
-
-}
-  
-.dpd{
-  margin-left:20%
-  
-}
-.search {
-  margin-left:37%
+li:hover {
+  color: red;
 }
 </style>
+
+
+

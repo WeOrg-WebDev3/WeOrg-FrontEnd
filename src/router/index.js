@@ -1,72 +1,78 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from '../views/Home'
-import Login from '../views/Login'
-import Signup from '../views/Signup'
-import About from '../views/About'
-import Burial from '../views/Burial'
-import Birthday from '../views/Birthday'
-import Baptist from '../views/Baptist'
-import Wedding from '../views/Wedding'
-
-// import SearchBar from '../components/searchBar'
-
-Vue.use(Router)
-
-export default new Router({
-  mode: 'history',
-
-  routes: [
-    { 
-      path: '/', 
-      component: Home
-    },
-    { 
-        path: '/Home', 
-        component: Home
-      },
-    { 
-      path: '/About', 
-      component: About
-    },
-
-    {
-      path: '/Login',
-      component: Login,
-      props: (route) => ({ name: route.query.name })
-    },
-    {
-        path: '/Signup',
-        component: Signup,
-        props: (route) => ({ name: route.query.name })
-      },
-    { 
-        path: '/Burial', 
-        component: Burial
-      },
-      { 
-        path: '/Birthday', 
-        component: Birthday
-      },
-      { 
-        path: '/Baptist', 
-        component: Baptist
-      },
-      {
-          path: '/Wedding',
-          component: Wedding
-      }
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Landing from "../components/Landing.vue";
+import Login from "../views/Login.vue";
+import Signup from "../views/Signup.vue";
+import viewPorfolio from "../views/viewPorfolio.vue";
+import personalAccount from "../views/personalAccount.vue";
+import Concert from "../views/Concert.vue";
+import Birthday from "../views/Birthday.vue";
+import Wedding from "../views/Wedding.vue"
 
 
-    // {
-    //   path: '/signup',
-    //   component: SignUp,
-    //   props: (route) => ({ name: route.query.name })
-    // },
-    // {
-    //   path: '/personalinfo',
-    //   component: PersonalInfo,
-    //   props: (route) => ({ name: route.query.name })
-    // }
-  ]
-})
+Vue.use(VueRouter);
+
+const routes = [
+  {
+    path: "/Home",
+    name: "home",
+    component: Landing
+  },
+  {
+    path: "/",
+    name: "home",
+    component: Landing
+  },
+  {
+    path: "/About",
+    name: "about",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/About.vue")
+  },{
+    path: "/Login",
+    name: "login",
+    component: Login
+  },
+  {
+    path: "/Signup",
+    name: "signup",
+    component: Signup
+  },
+  {
+    path: "/ViewPorfolio",
+    name: "viewPorfolio",
+    component: viewPorfolio
+  },
+  {
+    path: "/personalAccount", 
+    name: "personalAccount",
+    component: personalAccount
+  },
+  {
+    path: "/concert", 
+    name: "Concert",
+    component: Concert
+  },
+  {
+    path: "/birthday", 
+    name: "Birthday",
+    component: Birthday
+  },
+  {
+    path: '/wedding', 
+    name: 'Wedding',
+    component: Wedding
+  }
+  
+];
+
+const router = new VueRouter({
+  mode: "history",
+  base: process.env.BASE_URL,
+  routes
+});
+
+export default router;

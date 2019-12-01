@@ -32,7 +32,7 @@ export default {
   methods: {
     addOrg() {
       var org = [];
-      var event = "Birthday";
+      var event = "Concert";
       this.axios
         .get("http://localhost:8002/retrieveOneEvent/"+ event)
         .then(response => {

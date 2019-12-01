@@ -1,170 +1,101 @@
 <template>
-  <div class="container">
-    <center>
-      <form id="lgn">
-        <h1 class="sign">Login</h1>
-        <label>
-          <p class="label-txt">ENTER USERNAME</p>
-          <input type="text" class="input" required >
-          <div class="line-box">
-            <div class="line"></div>
-          </div>
-        </label>
-        <label>
-          <p class="label-txt">ENTER PASSWORD</p>
-          <input type="password" class="input" required >
-          <div class="line-box">
-            <div class="line"></div>
-          </div>
-        </label>
-        
-
-        <button type="submit">submit</button>
-      </form>
-    </center>
+  <div>
+    <topNav />
+     
+      <v-app class="form" id="inspire">
+        <v-content id="bg">
+          <v-container style="margin-top:5%" >
+            <v-row align="center" justify="center" >
+              <v-col cols="12" sm="8" md="6">
+                <v-card class="elevation-12">
+                  <v-toolbar color="secondary" dark flat>
+                    <v-toolbar-title>LOGIN</v-toolbar-title>
+                    <v-spacer />
+                  </v-toolbar>
+                  <v-card-text>
+                    <v-form>
+                      <v-text-field
+                        v-model="email"
+                        label="Email"
+                        name="login"
+                        prepend-icon="mdi-account"
+                        type="text"
+                        :rules="emailRules"
+                        required
+                      ></v-text-field>
+                      <v-text-field
+                        v-model="password"
+                        id="password"
+                        label="Password"
+                        name="password"
+                        prepend-icon="mdi-lock"
+                        type="password"
+                        :rules="passwordRules"
+                        required
+                      ></v-text-field>
+                    </v-form>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer />
+                    <v-btn v-on:click="login" color="secondary">Login</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-content>
+      </v-app>
+    
   </div>
 </template>
+
+
 <script>
-// import $ from "jquery";
-// import axios from "axios";
+import topNav from "../views/topNav.vue";
+import axios from "axios";
 
-// export default {
-//   name: "login",
-//   data() {
-//     return {
-//       username: "",
-//       password: ""
-//     };
-//   },
-//   methods: {
-//     login() {
-//       let cred = { username: this.username, password: this.password };
-//       axios.post("http://localhost:8081/login", cred).then(response => {
-//         if (response.data == "login successful") {
-//           alert("login successfull");
-//         } else {
-//           alert("cannot find account");
-//         }
-//       });
-//     }
-//   },
-//   mounted() {
-//     $(".input").focus(function() {
-//       $(this)
-//         .parent()
-//         .find(".label-txt")
-//         .addClass("label-active");
-//     });
-
-//     $(".input").focusout(function() {
-//       if ($(this).val() == "") {
-//         $(this)
-//           .parent()
-//           .find(".label-txt")
-//           .removeClass("label-active");
-//       }
-//     });
-//   }
-// };
+export default {
+  name: "btnLogin",
+  data: () => ({
+    valid: true,
+    password: "",
+    passwordRules: [
+      v => !!v || "password  is required",
+      v => (v && v.length >= 8) || "Name must be less  8 numbers"
+    ],
+    email: "",
+    emailRules: [
+      v => !!v || "E-mail is required",
+      v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+    ]
+  }),
+  methods: {
+    login() {
+      axios
+        .post("http://localhost:8002/signin", {
+          username: this.email,
+          password: this.password
+        })
+        .then(response => {
+          this.$router.push({ path: "personalAccount" });
+          console.log(response);
+        });
+    }
+  },
+  props: {},
+  components: {
+    topNav
+  }
+};
 </script>
 <style scoped>
-#lgn {
-  border: 1px solid lightgrey;
-  width: 400px;
-  margin-top: 40%;
-  margin-bottom: 40px;
-  background: white;
-  padding: 40px;
-  text-align: center;
-  -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-}
 
-.container {
-  justify-content: center;
-  /* background-image: linear-gradient(to bottom right, white, #d9dcde); */
-  margin: 0;
-  padding-top: 0;
-  padding-left: 35%;
-  padding-right: 35%;
+#bg {
+  height: 100%;
   width: 100%;
-}
-.input {
-  font-weight: normal;
-}
-
-label {
-  display: block;
-  position: relative;
-  margin: 40px 0px;
-}
-.label-txt {
-  position: absolute;
-  top: -1.6em;
-  padding: 10px;
-  font-weight: normal;
-  font-family: sans-serif;
-  font-size: 1em;
-  letter-spacing: 1px;
-  color: rgb(120, 120, 120);
-  transition: ease 0.3s;
-}
-.input {
-  width: 100%;
-  padding: 10px;
-  background: transparent;
-  border: none;
-  outline: none;
-  text-align: left;
-}
-
-.line-box {
-  position: relative;
-  width: 100%;
-  height: 1px;
-  background: #bcbcbc;
-}
-
-.line {
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  top: 0px;
-  transform: translateX(0%);
-  background: black;
-  transition: ease 0.6s;
-}
-
-.input:focus + .line-box .line {
-  width: 100%;
-}
-
-.label-active {
-  top: -3em;
-}
-
-button {
-  display: inline-block;
-  padding: 12px 24px;
-  background: rgb(220, 220, 220);
-  font-weight: bold;
-  color: rgb(120, 120, 120);
-  border: none;
-  outline: none;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: ease 0.3s;
-}
-
-button:hover {
-  background: #5d5f61;
-  color: #ffffff;
-}
-
-.sign {
-  padding: 0px;
-  margin-top: 0;
-  margin-bottom: 60px;
+  top: 0;
+  bottom: 0;
+  background-image: url("../assets/bg.jpg");
+  background-size: cover;
 }
 </style>

@@ -1,4 +1,4 @@
-# myproject
+# projectweb-weorg
 
 ## Project setup
 ```
