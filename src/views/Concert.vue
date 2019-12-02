@@ -33,6 +33,7 @@ export default {
     addOrg() {
       var org = [];
       var event = "Concert";
+      var token =  localStorage.getItem('token')
       this.axios
         .get("http://localhost:8002/retrieveOneEvent/"+ event)
         .then(response => {
