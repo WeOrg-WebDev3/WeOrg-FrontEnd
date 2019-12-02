@@ -1,63 +1,120 @@
 
 <template>
- <div>
+  <div>
     <topNavUser/>
-    
+
     <div id="bg">
-     
-   
-    <v-container fluid>
-      
-      <v-row dense>
-        <v-col cols="6" sm="12">
-          <v-card>
-            <v-img src="../assets/wed.png" class="white--text align-end" height="300px"></v-img>
-            <v-img
-              src="../assets/cons.jpg"
-              style="height:220px;width:200px;possition:relative;margin-top:-10%;margin-left:42.5%"
-            ></v-img><br>
-            <center>
-              <h1>Mellyne Grace R. Nadela</h1>
-            </center>
-            <hr>
-            <h2 style="margin-left:50px">Personal Information</h2> <br><div style="margin-left:20px">
-              
-     
-        <v-icon>mdi-map-marker</v-icon><span>Lumapao Canlaon City, Negros Oriental</span><br>
-        <v-icon>mdi-email</v-icon><span>mgnadela@gmail.com</span><br>
-        <v-icon>mdi-cellphone-iphone</v-icon><span>09756818441</span><br>
+      <v-container fluid>
+        <v-row dense>
+          <v-col cols="6" sm="12">
+            <v-card>
+              <v-img src="../assets/wed.png" class="white--text align-end" height="300px"></v-img>
+              <v-img
+                src="../assets/cons.jpg"
+                style="height:220px;width:200px;possition:relative;margin-top:-10%;margin-left:42.5%"
+              ></v-img>
+              <br>
+              <center>
+                <h1>Mellyne Grace R. Nadela</h1>
+              </center>
+              <hr>
+              <h2 style="margin-left:50px">Personal Information</h2>
+              <br>
+              <div style="margin-left:20px">
+                <v-icon>mdi-map-marker</v-icon>
+                <span>Lumapao Canlaon City, Negros Oriental</span>
+                <br>
+                <v-icon>mdi-email</v-icon>
+                <span>mgnadela@gmail.com</span>
+                <br>
+                <v-icon>mdi-cellphone-iphone</v-icon>
+                <span>09756818441</span>
+                <br>
 
-        <v-icon>mdi-calendar-today</v-icon><span>Wedding</span><br>
-        <v-icon>mdi-cash</v-icon><span>1000-2000</span><br>
-        <v-icon>mdi-gift</v-icon><span>Free Picturial</span><br>
-         
-      </div>
-    
-            
-          </v-card>
-        </v-col>
-       
-      </v-row>
-    </v-container>
-    
+                <v-icon>mdi-calendar-today</v-icon>
+                <span>Wedding</span>
+                <br>
+                <v-icon>mdi-cash</v-icon>
+                <span>1000-2000</span>
+                <br>
+                <v-icon>mdi-gift</v-icon>
+                <span>Free Picturial</span>
+                <br>
+              </div>
 
-   
-     
+              <template>
+                <v-row justify="center">
+                  <v-dialog v-model="dialog" persistent max-width="630px">
+                    <template v-slot:activator="{ on }">
+                      <v-btn color="primary" width="50%" dark v-on="on">Inquire</v-btn>
+                    </template>
+                    <template>
+                      <v-card class="elevation-12">
+                        <v-toolbar color="secondary" dark flat>
+                          <v-toolbar-title>INQUIRE</v-toolbar-title>
+                          
+                        </v-toolbar>
+                        <v-card-text>
+                          <v-form ref="form" v-model="valid">
+                            <v-text-field v-model="name" :rules="nameRules" label="Name" required></v-text-field>
+                            <v-text-field
+                              v-model="address"
+                              :rules="nameRules"
+                              label="Address"
+                              required
+                            ></v-text-field>
+                            <v-text-field
+                              v-model="email"
+                              :rules="emailRules"
+                              label="E-mail"
+                              required
+                            ></v-text-field>
 
-      <hr />
+                            <v-text-field
+                              v-model="contact"
+                              :rules="numberRules"
+                              label="Contact Number"
+                              type="number"
+                              min="0"
+                              required
+                            ></v-text-field>
+                            <v-textarea
+                              v-model="message"
+                              outlined
+                              name="input-7-4"
+                              label="Write Message"
+                            ></v-textarea>
 
-     
+                            <v-card-actions>
+                             
+                              <v-btn
+                                color="secondary"
+                                width="50%"
+                                text
+                                @click="dialog = false"
+                              >Close</v-btn>
+                              <v-btn color="primary" width="50%" text @click="dialog = false">Send</v-btn>
+                            </v-card-actions>
+                          </v-form>
+                        </v-card-text>
+                      </v-card>
+                    </template>
+                  </v-dialog>
+                </v-row>
+              </template>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
 
-     
-        <template >
+    <template>
       <v-row style="width:90%;margin-left:5%;margin-right:5%;margin-top:5%">
-        
-        <v-col >
-          <v-card >
+        <v-col>
+          <v-card>
             <v-container fluid>
-                <h2>My Porfolio</h2>
+              <h2>My Porfolio</h2>
               <v-row>
-                    
                 <v-col v-for="n in 9" :key="n" class="d-flex child-flex" cols="4">
                   <v-card flat tile class="d-flex">
                     <v-img
@@ -80,21 +137,35 @@
         </v-col>
       </v-row>
     </template>
-
-      <hr />
-    </div>
-      </div>
-
+  </div>
 </template>
 <script>
-import topNavUser from "../views/topNavUser.vue"
+import topNavUser from "../views/topNavUser.vue";
 export default {
-  name:"personalAccount",
-  components:{
+  data() {
+    return {
+      valid: true,
+      dialog: false,
+      name: "",
+      msg: "",
+      nameRules: [v => !!v || "Name is required"],
+      contact: "",
+      numberRules: [
+        v => !!v || "Contact Number is required",
+        v => (v && v.length <= 11) || "Name must be less  11 numbers",
+        v => (v && v.length >= 11) || "Name must be less  11 numbers"
+      ],
+      email: "",
+      emailRules: [
+        v => !!v || "E-mail is required",
+        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+      ]
+    };
+  },
+  components: {
     topNavUser
-
   }
-}
+};
 </script>
 
 <style scoped>

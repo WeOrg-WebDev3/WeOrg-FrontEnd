@@ -5,6 +5,7 @@
     <v-data-table :headers="headers" :items="org">
     </v-data-table>
   </v-container>
+  <button @click="goto('/visitProfile')">visit</button>
   </div>
 </template>
 
@@ -57,6 +58,9 @@ export default {
         });
 
       return org;
+    },
+    goto(link){
+      this.$router.push({path:link});
     }
   },
    mounted() {
