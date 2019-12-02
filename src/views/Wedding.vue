@@ -1,7 +1,7 @@
 <template>
 <div>
 <topNav/>
-  <v-container fluid>
+  <v-container fluid style="width:70%">
     <v-data-table :headers="headers" :items="org">
     </v-data-table>
   </v-container>
@@ -24,7 +24,7 @@ export default {
         },
         { text: "Address", value: "address",sortable: false, },
         { text: "Contact", value: "contact",sortable: false, },
-        { text: "Action", value: "event" ,sortable: false,}
+        { text: "Action", value: "icon" ,sortable: false,}
       ]
     };
   },
