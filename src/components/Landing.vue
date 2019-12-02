@@ -7,7 +7,7 @@
         <v-row dense>
           <v-col cols="6" sm="4">
             <v-card>
-              <v-img src="../assets/wed.png" class="white--text align-end" height="300px">
+              <v-img src="../assets/wed.jpg" class="white--text align-end" height="300px">
                 <v-card-title>WEDDING</v-card-title>
               </v-img>
               <v-card-actions>
@@ -53,56 +53,41 @@
               <p style="text-align:center;font-size:24px">Is a web application that aids the Organizer from the the different fields of event to accomodate clients to eliminate time and effort to find for clients. Clients has the highest benefit since it would be easy for them to access different services in a much easy way.</p>
       </v-row>
       <v-row >
-        <carousel :per-page="7" :navigate-to="someLocalProperty" :mouse-drag="true">
-        <slide>
-          
-          <v-img src="../assets/cons.jpg" class="white--text align-end" height="300px" width="400px" border-radius="60%">
-                <v-card-title>CONCERT</v-card-title>
-              </v-img>
-            
-        </slide>
-        <slide>
-          <v-img src="../assets/concert1.jpg" class="white--text align-end" height="300px" width="400px">
-                <v-card-title>CONCERT</v-card-title>
-              </v-img>
-        </slide>
-        <slide>
-          <v-img src="../assets/birthday1.jpg" class="white--text align-end" height="300px" width="400px">
-                <v-card-title>BIRTHDAY</v-card-title>
-              </v-img>
-        </slide>           
+        <carousel :per-page="5" :mouse-drag="true" style="">
         
-          <slide>
+        <slide>
           <v-img src="../assets/concert2.jpg" class="white--text align-end" height="300px" width="400px">
                 <v-card-title>CONCERT</v-card-title>
               </v-img>
+        </slide>
+        <slide>
+          <v-img src="../assets/concert3.jpg" class="white--text align-end" height="300px" width="400px">
+                <v-card-title>CONCERT</v-card-title>
+              </v-img>
         </slide>           
-    
+        
+
           <slide>
-          <v-img src="../assets/birthday.jpg" class="white--text align-end" height="300px" width="400px">
+          <v-img src="../assets/birthday2.jpg" class="white--text align-end" height="300px" width="400px">
                 <v-card-title>BIRTHDAY</v-card-title>
               </v-img>
         </slide>           
      
           <slide>
-          <v-img src="../assets/wedding2.jpg" class="white--text align-end" height="300px" width="400px">
-                <v-card-title>WEDDING</v-card-title>
-              </v-img>
-        </slide>           
-    
-          <slide>
-          <v-img src="../assets/birthday1.jpg" class="white--text align-end" height="300px" width="400px">
+          <v-img src="../assets/birthday3.jpg" class="white--text align-end" height="300px" width="400px">
                 <v-card-title>BIRTHDAY</v-card-title>
               </v-img>
         </slide>           
+    
+                
         
           <slide>
-          <v-img src="../assets/wedding1.jpg" class="white--text align-end" height="300px" width="400px">
+          <v-img src="../assets/wedding2.jpg" class="white--text align-end" height="300px" width="400px">
                 <v-card-title>WEDDING</v-card-title>
               </v-img>
         </slide> 
          <slide>
-          <v-img src="../assets/wedding1.jpg" class="white--text align-end" height="300px" width="400px">
+          <v-img src="../assets/wedding3.jpg" class="white--text align-end" height="300px" width="400px">
                 <v-card-title>WEDDING</v-card-title>
               </v-img>
         </slide>           

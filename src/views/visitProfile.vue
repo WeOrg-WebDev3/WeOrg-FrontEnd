@@ -11,7 +11,7 @@
       <v-row dense>
         <v-col cols="6" sm="12">
           <v-card>
-            <v-img src="../assets/wed.png" class="white--text align-end" height="300px"></v-img>
+            <v-img src="../assets/wed.jpg" class="white--text align-end" height="300px"></v-img>
             <v-img
               src="../assets/cons.jpg"
               style="height:220px;width:200px;possition:relative;margin-top:-10%;margin-left:42.5%"

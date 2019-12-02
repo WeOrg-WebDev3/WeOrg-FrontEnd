@@ -8,7 +8,7 @@
         <v-row dense>
           <v-col cols="6" sm="12">
             <v-card>
-              <v-img src="../assets/wed.png" class="white--text align-end" height="300px"></v-img>
+              <v-img src="../assets/bg.jpg" class="white--text align-end" height="300px"></v-img>
               <v-btn
                 style="position:relative;margin-top:-48%;width:10%;margin-left:89%"
                 color="red"
