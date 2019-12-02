@@ -54,61 +54,68 @@
       </v-row>
       <v-row >
         <carousel :per-page="7" :navigate-to="someLocalProperty" :mouse-drag="true">
-        <slide>
-          
-          <v-img src="../assets/cons.jpg" class="white--text align-end" height="300px" width="400px" border-radius="60%">
-                <v-card-title>CONCERT</v-card-title>
-              </v-img>
-            
+        <slide>      
+            <sliders
+              v-bind:picture="require('@/assets/cons.jpg')"
+              v-bind:title="'CONCERT'"
+            ></sliders>
         </slide>
         <slide>
-          <v-img src="../assets/concert1.jpg" class="white--text align-end" height="300px" width="400px">
-                <v-card-title>CONCERT</v-card-title>
-              </v-img>
+              <sliders
+              v-bind:picture="require('@/assets/concert1.jpg')"
+              v-bind:title="'CONCERT'"
+            ></sliders>
         </slide>
         <slide>
-          <v-img src="../assets/birthday1.jpg" class="white--text align-end" height="300px" width="400px">
-                <v-card-title>BIRTHDAY</v-card-title>
-              </v-img>
+              <sliders
+              v-bind:picture="require('@/assets/birthday1.jpg')"
+              v-bind:title="'BIRTHDAY'"
+            ></sliders>
         </slide>           
         
           <slide>
-          <v-img src="../assets/concert2.jpg" class="white--text align-end" height="300px" width="400px">
-                <v-card-title>CONCERT</v-card-title>
-              </v-img>
+              <sliders
+              v-bind:picture="require('@/assets/concert2.jpg')"
+              v-bind:title="'CONCERT'"
+            ></sliders>
         </slide>           
     
           <slide>
-          <v-img src="../assets/birthday.jpg" class="white--text align-end" height="300px" width="400px">
-                <v-card-title>BIRTHDAY</v-card-title>
-              </v-img>
+        
+              <sliders
+              v-bind:picture="require('@/assets/birthday.jpg')"
+              v-bind:title="'BIRTHDAY'"
+            ></sliders>
         </slide>           
      
           <slide>
-          <v-img src="../assets/wedding2.jpg" class="white--text align-end" height="300px" width="400px">
-                <v-card-title>WEDDING</v-card-title>
-              </v-img>
+              <sliders
+              v-bind:picture="require('@/assets/wedding2.jpg')"
+              v-bind:title="'WEDDING'"
+            ></sliders>
         </slide>           
     
           <slide>
-          <v-img src="../assets/birthday1.jpg" class="white--text align-end" height="300px" width="400px">
-                <v-card-title>BIRTHDAY</v-card-title>
-              </v-img>
+              <sliders
+              v-bind:picture="require('@/assets/birthday1.jpg')"
+              v-bind:title="'BIRTHDAY'"
+            ></sliders>
         </slide>           
         
           <slide>
-          <v-img src="../assets/wedding1.jpg" class="white--text align-end" height="300px" width="400px">
-                <v-card-title>WEDDING</v-card-title>
-              </v-img>
+              <sliders
+              v-bind:picture="require('@/assets/wedding1.jpg')"
+              v-bind:title="'WEDDING'"
+            ></sliders>
         </slide> 
          <slide>
-          <v-img src="../assets/wedding1.jpg" class="white--text align-end" height="300px" width="400px">
-                <v-card-title>WEDDING</v-card-title>
-              </v-img>
+              <sliders
+              v-bind:picture="require('@/assets/wedding1.jpg')"
+              v-bind:title="'WEDDING'"
+            ></sliders>
         </slide>           
         <slide>
 
-          
         </slide>
       </carousel>
           </v-row>
@@ -127,6 +134,7 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel';
 import topNav from "../views/topNav.vue";
+import sliders from "../components/slider.vue";
 
 export default {
   methods: {
@@ -147,7 +155,8 @@ export default {
   components: {
       topNav,
       Carousel,
-      Slide
+      Slide,
+      sliders
 
     }
 };
