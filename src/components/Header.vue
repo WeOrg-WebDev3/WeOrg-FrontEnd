@@ -1,7 +1,11 @@
 <template>
-  <div> 
-    <v-system-bar height="250%" id="bg"></v-system-bar>
-    <v-img src="../assets/weOrg.png" style="heigth:20%;width:20%;position:relative;margin-top:10px%;margin-bottom:-2%"></v-img>
+  <div>
+    <v-system-bar color="#00C9FFD1" height="250%"></v-system-bar>
+    <div>
+
+      <v-img src="../assets/logoWeoRg.png" style="height:20%;width:20%;position:relative;margin-top:-16%;margin-bottom:-2%"> </v-img>
+    </div>
+
      
         
      
@@ -79,15 +83,14 @@ li {
 li:hover {
   color: red;
 }
-#bg {
+/* #bga {
   height: 100%;
   width: 100%;
   top: 0;
   bottom: 0;
   background-image: url("../assets/bg.jpg");
   background-size: cover;
-}
-
+} */
 </style>
 
 

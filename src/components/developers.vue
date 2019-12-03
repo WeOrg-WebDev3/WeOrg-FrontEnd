@@ -1,12 +1,16 @@
 <template>
-  <v-card>
+  <v-card id="bg">
     <v-row>
       <v-col>
-        <img :src="picture" />
+        <img  :src="picture" id="image" />
       </v-col>
-      <v-col cols='10' class="text-left">
-        <h1>{{name}}</h1>
-          <p>{{description}}</p>
+      <v-col cols='12'  sm="6" class="text-left">
+        <h1 style="margin-left:7%">{{name}}</h1>
+        <p style="margin-left:13%">{{description}}</p>
+        
+      </v-col>
+       <v-col  cols='12'  sm="6" class="text-left">
+        <h1 style="margin-top:-70%;margin-left:7%">{{info}}</h1> 
       </v-col>
     </v-row>
   </v-card>
@@ -16,7 +20,8 @@ export default {
   props: {
     name: String,
     description: String,
-    picture: String
+    picture: String,
+    info:String
   }
 };
 </script>
@@ -24,5 +29,10 @@ export default {
 <style scoped>
   v-row{
     background-color:aqua;
+  }
+
+  #image{
+    margin-left: 5%;
+    border-radius: 50%;
   }
 </style>

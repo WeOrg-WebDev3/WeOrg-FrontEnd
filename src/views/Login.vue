@@ -1,51 +1,50 @@
 <template>
   <div>
     <topNav />
-     
-      <v-app class="form" id="inspire">
-        <v-content id="bg">
-          <v-container style="margin-top:5%" >
-            <v-row align="center" justify="center" >
-              <v-col cols="12" sm="8" md="6">
-                <v-card class="elevation-12">
-                  <v-toolbar color="secondary" dark flat>
-                    <v-toolbar-title>LOGIN</v-toolbar-title>
-                    <v-spacer />
-                  </v-toolbar>
-                  <v-card-text>
-                    <v-form>
-                      <v-text-field
-                        v-model="email"
-                        label="Email"
-                        name="login"
-                        prepend-icon="mdi-account"
-                        type="text"
-                        :rules="emailRules"
-                        required
-                      ></v-text-field>
-                      <v-text-field
-                        v-model="password"
-                        id="password"
-                        label="Password"
-                        name="password"
-                        prepend-icon="mdi-lock"
-                        type="password"
-                        :rules="passwordRules"
-                        required
-                      ></v-text-field>
-                    </v-form>
-                  </v-card-text>
-                  <v-card-actions>
-                    <v-spacer />
-                    <v-btn v-on:click="login" color="secondary">Login</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-content>
-      </v-app>
-    
+
+    <v-app class="form" id="inspire">
+      <v-content id="bg">
+        <v-container style="margin-top:5%">
+          <v-row align="center" justify="center">
+            <v-col cols="12" sm="8" md="6">
+              <v-card class="elevation-12">
+                <v-toolbar color="secondary" dark flat>
+                  <v-toolbar-title>LOGIN</v-toolbar-title>
+                  <v-spacer />
+                </v-toolbar>
+                <v-card-text>
+                  <v-form>
+                    <v-text-field
+                      v-model="email"
+                      label="Email"
+                      name="login"
+                      prepend-icon="mdi-account"
+                      type="text"
+                      :rules="emailRules"
+                      required
+                    ></v-text-field>
+                    <v-text-field
+                      v-model="password"
+                      id="password"
+                      label="Password"
+                      name="password"
+                      prepend-icon="mdi-lock"
+                      type="password"
+                      :rules="passwordRules"
+                      required
+                    ></v-text-field>
+                  </v-form>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer />
+                  <v-btn v-on:click="login" color="secondary">Login</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-content>
+    </v-app>
   </div>
 </template>
 
@@ -73,12 +72,15 @@ export default {
     login() {
       axios
         .post("http://localhost:8002/signin", {
-          username: this.email,
+          email: this.email,
           password: this.password
         })
         .then(response => {
+          console.log(response.data,'data')
           this.$router.push({ path: "personalAccount" });
-          console.log(response);
+          console.log(response.data);
+          sessionStorage.setItem("token", response.data.token);
+          sessionStorage.setItem("id", response.data.id);
         });
     }
   },
@@ -89,7 +91,6 @@ export default {
 };
 </script>
 <style scoped>
-
 #bg {
   height: 100%;
   width: 100%;

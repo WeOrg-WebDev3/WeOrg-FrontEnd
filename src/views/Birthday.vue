@@ -1,10 +1,12 @@
 <template>
-<div id="bg">
+<div id="bg"> 
 <topNav/>
-  <v-container fluid>
+<div >
+  <v-container fluid style="width:70%">
     <v-data-table :headers="headers" :items="org">
     </v-data-table>
   </v-container>
+  </div>
   </div>
 </template>
 
@@ -24,7 +26,7 @@ export default {
         },
         { text: "Address", value: "address",sortable: false, },
         { text: "Contact", value: "contact",sortable: false, },
-        { text: "Action", value: "event" ,sortable: false,}
+        { text: "Action", value: "icon" ,sortable: false,}
       ]
     };
   },

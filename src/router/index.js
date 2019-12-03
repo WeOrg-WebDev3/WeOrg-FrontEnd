@@ -8,6 +8,7 @@ import personalAccount from "../views/personalAccount.vue";
 import Concert from "../views/Concert.vue";
 import Birthday from "../views/Birthday.vue";
 import Wedding from "../views/Wedding.vue"
+import visitProfile from "../views/visitProfile.vue"
 
 
 Vue.use(VueRouter);
@@ -65,7 +66,11 @@ const routes = [
     path: '/wedding', 
     name: 'Wedding',
     component: Wedding
-  }
+  }, {
+    path: "/visitProfile",
+    name: "visitProfile",
+    component: visitProfile
+  },
   
 ];
 

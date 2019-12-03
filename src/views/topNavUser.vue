@@ -12,8 +12,8 @@
       <v-icon>mdi-login</v-icon>
     </v-btn>
     <v-btn icon>
-      <span>View Porfolio</span>
-      <v-icon >mdi-clipboard-account</v-icon>
+      <span >View Porfolio</span>
+      <v-icon  href="#porfolio">mdi-clipboard-account</v-icon>
     </v-btn>
   </v-bottom-navigation>
  
