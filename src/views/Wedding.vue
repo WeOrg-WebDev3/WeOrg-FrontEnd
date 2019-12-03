@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="bg">
 <topNav/>
   <v-container fluid style="width:70%">
     <v-data-table :headers="headers" :items="org">
@@ -66,3 +66,13 @@ export default {
     }
 };
 </script>
+<style scoped>
+#bg {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  background-image: url("../assets/bg.jpg");
+  background-size: cover;
+}
+</style>

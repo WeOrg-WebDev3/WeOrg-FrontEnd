@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <v-system-bar color="#0065FFB6" height="150%"></v-system-bar>
+  <div > 
+    <v-system-bar height="250%" id="bg"></v-system-bar>
+    <v-img src="../assets/weOrg.png" style="heigth:20%;width:20%;position:relative;margin-top:-16%;margin-bottom:-2%"></v-img>
      
         
      
@@ -22,17 +23,7 @@
 <script>
 export default {
   name: "Sidebar",
-
-  // computed: {
-  //   color () {
-  //     switch (this.bottomNav) {
-  //       case 0: return 'blue-grey'
-  //       case 1: return 'teal'
-  //       case 2: return 'brown'
-  //       case 3: return 'indigo'
-  //     }
-  //   },
-  // },
+ 
   
   }
   // },
@@ -68,17 +59,20 @@ export default {
   //     this.drawer = false;
   //   }
   // }
-
 </script>
 <style scoped>
 li {
   display: block;
 }
-
 li:hover {
   color: red;
 }
+#bg {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  background-image: url("../assets/bg.jpg");
+  background-size: cover;
+}
 </style>
-
-
-

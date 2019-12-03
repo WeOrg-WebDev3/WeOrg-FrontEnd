@@ -1,5 +1,5 @@
 <template>
-<div>
+<div  id="bg">
 <topNav/>
   <v-container fluid style="width:70%">
     <v-data-table :headers="headers" :items="org">
