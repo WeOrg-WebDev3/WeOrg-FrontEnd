@@ -130,7 +130,7 @@ export default {
       ) {
         console.log(this.address);
         this.axios
-          .post("http://localhost:8002/account", {
+          .post("http://localhost:8001/account", {
             name: this.name,
             address: this.address,
             email: this.email,
@@ -138,7 +138,8 @@ export default {
             contact: this.contact,
             event: this.event,
             price: this.price,
-            packages: this.packages
+            packages: this.packages,
+            
           })
           .then(response => {
             this.$router.push({ path: "Login" });

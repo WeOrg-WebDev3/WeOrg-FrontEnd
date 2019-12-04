@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <topNavUser/>
+    <topNavUser />
     <div id="bg">
       <v-container fluid>
         <v-row dense>
@@ -12,34 +12,34 @@
                 src="../assets/cons.jpg"
                 style="height:220px;width:200px;possition:relative;margin-top:-10%;margin-left:42.5%"
               ></v-img>
-              <br>
+              <br />
               <center>
-               <h1>{{orgs[0].name}}</h1>
+                <h1>{{orgs[0].name}}</h1>
               </center>
-              <hr>
+              <hr />
               <h2 style="margin-left:50px">Personal Information</h2>
-              <br>
+              <br />
               <div style="margin-left:20px">
                 <v-icon>mdi-map-marker</v-icon>
                 <span>{{orgs[0].address}}</span>
-                <br>
+                <br />
                 <v-icon>mdi-email</v-icon>
                 <span>{{orgs[0].email}}</span>
-                <br>
+                <br />
                 <v-icon>mdi-cellphone-iphone</v-icon>
                 <span>{{orgs[0].contact}}</span>
-                <br>
+                <br />
 
                 <v-icon>mdi-calendar-today</v-icon>
 
                 <span>{{orgs[0].event}}</span>
-                <br>
+                <br />
                 <v-icon>mdi-cash</v-icon>
                 <span>{{orgs[0].price}}</span>
-                <br>
+                <br />
                 <v-icon>mdi-gift</v-icon>
                 <span>{{orgs[0].packages}}</span>
-                <br>
+                <br />
               </div>
 
               <template>
@@ -52,26 +52,25 @@
                       <v-card class="elevation-12">
                         <v-toolbar color="secondary" dark flat>
                           <v-toolbar-title>INQUIRE</v-toolbar-title>
-                          
                         </v-toolbar>
                         <v-card-text>
                           <v-form ref="form" v-model="valid">
-                            <v-text-field v-model="name" :rules="nameRules" label="Name" required></v-text-field>
+                            <v-text-field v-model="iname" :rules="nameRules" label="Name" required></v-text-field>
                             <v-text-field
-                              v-model="address"
+                              v-model="iaddress"
                               :rules="nameRules"
                               label="Address"
                               required
                             ></v-text-field>
                             <v-text-field
-                              v-model="email"
+                              v-model="iemail"
                               :rules="emailRules"
                               label="E-mail"
                               required
                             ></v-text-field>
 
                             <v-text-field
-                              v-model="contact"
+                              v-model="icontact"
                               :rules="numberRules"
                               label="Contact Number"
                               type="number"
@@ -79,21 +78,25 @@
                               required
                             ></v-text-field>
                             <v-textarea
-                              v-model="message"
+                              v-model="imessage"
                               outlined
                               name="input-7-4"
                               label="Write Message"
                             ></v-textarea>
 
                             <v-card-actions>
-                             
                               <v-btn
                                 color="secondary"
                                 width="50%"
                                 text
                                 @click="dialog = false"
                               >Close</v-btn>
-                              <v-btn color="primary" width="50%" text @click="dialog = false">Send</v-btn>
+                              <v-btn
+                                color="primary"
+                                width="50%"
+                                text
+                                @click="dialog = false;saveInquire()"
+                              >Send</v-btn>
                             </v-card-actions>
                           </v-form>
                         </v-card-text>
@@ -142,22 +145,22 @@
 <script>
 import topNavUser from "../views/topNav.vue";
 export default {
-  name:"visitProfile",
+  name: "visitProfile",
   data() {
     return {
-      orgs:[],
+      orgs: [],
       valid: true,
       dialog: false,
-      name: "",
-      msg: "",
+      iname: "",
+      imessage: "",
       nameRules: [v => !!v || "Name is required"],
-      contact: "",
+      icontact: "",
       numberRules: [
         v => !!v || "Contact Number is required",
         v => (v && v.length <= 11) || "Name must be less  11 numbers",
         v => (v && v.length >= 11) || "Name must be less  11 numbers"
       ],
-      email: "",
+      iemail: "",
       emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
@@ -167,15 +170,37 @@ export default {
   components: {
     topNavUser
   },
-  mounted(){
+  methods: {
+    
+    saveInquire() {
+       let Oid = sessionStorage.getItem("orgId");
+      console.log(Oid);
+      this.axios
+        .post("http://localhost:8001/query", {
+          name: this.iname,
+          address: this.iaddress,
+          email: this.iemail,
+          contact: this.icontact,
+          message: this.imessage,
+          orgId:this.Oid
+
+        })
+        .then(response => {
+          alert("Your request is successfully send");
+
+          console.log(response);
+        });
+    }
+  },
+  mounted() {
     var orgs = [];
     let id = sessionStorage.getItem("id");
     this.axios
-      .post(`http://localhost:8002/retriveprofile/${id}`)
+      .post(`http://localhost:8001/retriveprofile/${id}`)
       .then(response => {
         console.log(response);
         var dataT = response.data;
-         orgs.push(dataT);
+        orgs.push(dataT);
         //}
         // console.log(org);
         this.orgs = orgs;
@@ -187,8 +212,6 @@ export default {
 
     return orgs;
   }
-
-  
 };
 </script>
 

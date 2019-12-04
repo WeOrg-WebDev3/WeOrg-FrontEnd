@@ -33,40 +33,45 @@
                 src="../assets/cons.jpg"
                 style="height:220px;width:200px;possition:relative;margin-top:-10%;margin-left:42.5%"
               ></v-img>
-              <br>
+              <br />
               <center>
                 <h1>{{orgs[0].name}}</h1>
               </center>
-              <hr>
+              <hr />
               <h2 style="margin-left:50px">Personal Information</h2>
-              <br>
+              <br />
               <div style="margin-left:20px">
                 <v-icon>mdi-map-marker</v-icon>
                 <span>{{orgs[0].address}}</span>
-                <br>
+                <br />
                 <v-icon>mdi-email</v-icon>
                 <span>{{orgs[0].email}}</span>
-                <br>
+                <br />
                 <v-icon>mdi-cellphone-iphone</v-icon>
                 <span>{{orgs[0].contact}}</span>
-                <br>
+                <br />
 
                 <v-icon>mdi-calendar-today</v-icon>
 
                 <span>{{orgs[0].event}}</span>
-                <br>
+                <br />
                 <v-icon>mdi-cash</v-icon>
                 <span>{{orgs[0].price}}</span>
-                <br>
+                <br />
                 <v-icon>mdi-gift</v-icon>
                 <span>{{orgs[0].packages}}</span>
-                <br>
+                <br />
                 <v-card-actions>
                   <template>
                     <v-row justify="center">
                       <v-dialog v-model="dialog" persistent max-width="600px">
                         <template v-slot:activator="{ on }">
                           <v-btn color="primary" max-width="30%" dark v-on="on">Edit</v-btn>
+                          <v-btn
+                            color="primary"
+                            max-width="30%"
+                            @click="viewInquiries()"
+                          >View Inquiries</v-btn>
                         </template>
                         <v-card>
                           <v-card-title>
@@ -87,7 +92,7 @@
                                   label="Address"
                                   required
                                 ></v-text-field>
-                               
+
                                 <v-text-field
                                   v-model="econtact"
                                   :rules="numberRules"
@@ -139,7 +144,7 @@
         </v-row>
       </v-container>
 
-      <hr>
+      <hr />
 
       <template>
         <div>
@@ -183,6 +188,7 @@ export default {
   data() {
     return {
       orgs: [],
+      enquiries:[],
       dialog: false,
       valid: true,
       ename: "",
@@ -247,19 +253,42 @@ export default {
         package: this.epackages
       };
       this.axios
-        .put(`http://localhost:8002/Update/${id}`, editCred)
+        .put(`http://localhost:8001/Update/${id}`, editCred)
         .then(response => {
           console.log(response);
         });
         
-    }
+    },
+    viewInquiries(){
+      var enquiries = [];
+      let Orgid = sessionStorage.getItem("id");
+      this.axios
+      .post(`http://localhost:8001/retInquerybyOrgId/${Orgid}`)
+      .then(response => {
+        console.log(response);
+        var dataT = response.data;
+       
+        enquiries.push(dataT);
+      
+        this.enquiries = enquiries;
+        
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    return enquiries;
+  }
+  
+
+    
   },
   components: {},
   mounted() {
     var orgs = [];
     let id = sessionStorage.getItem("id");
     this.axios
-      .post(`http://localhost:8002/retriveprofile/${id}`)
+      .post(`http://localhost:8001/retriveprofile/${id}`)
       .then(response => {
         console.log(response);
         var dataT = response.data;

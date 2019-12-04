@@ -4,8 +4,14 @@
 <div >
   <v-container fluid style="width:70%">
     <v-data-table :headers="headers" :items="org">
+      <template v-slot:item.action="{ item }">
+     
+      <v-btn @click="retrieveOrg(item.id)">View Profile</v-btn>
+     
+    </template>
     </v-data-table>
   </v-container>
+
   </div>
   </div>
 </template>
@@ -25,8 +31,8 @@ export default {
           value: "name"
         },
         { text: "Address", value: "address",sortable: false, },
-        { text: "Contact", value: "contact",sortable: false, },
-        { text: "Action", value: "icon" ,sortable: false,}
+        { text: "Contact", value: "id",sortable: false, },
+        { text: "Action", value: "action" ,sortable: false,}
       ]
     };
   },
@@ -36,7 +42,7 @@ export default {
       var org = [];
       var event = "Wedding";
       this.axios
-        .get("http://localhost:8002/retrieveOneEvent/"+ event)
+        .get("http://localhost:8001/retrieveOneEvent/"+ event)
         .then(response => {
           console.log(response);
           var dataT = response.data;
@@ -48,7 +54,8 @@ export default {
               name: dataT[counter].name,
               address: dataT[counter].address,
               contact: dataT[counter].contact,
-              event: dataT[counter].event
+              event: dataT[counter].event,
+              id:dataT[counter]._id
             });
           }
           // console.log(org);
@@ -59,6 +66,13 @@ export default {
         });
 
       return org;
+    },
+    retrieveOrg(item){
+     this.$router.push({ path: "visitProfile" });
+    sessionStorage.setItem("id", item);
+     
+      
+      
     }
   },
    mounted() {
