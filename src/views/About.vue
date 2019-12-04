@@ -11,7 +11,7 @@
               v-bind:picture="require('@/assets/princess.png')"
               v-bind:name="'Princess Joy Duran'"
               v-bind:description="'Project Developer'"
-              v-bind:info ="'---Once you choose survival over your dream, you lose your dream---'"
+              v-bind:info ="'Once you choose survival over your dream, you lose your dream'"
             >
             </dev>
             </v-col>
@@ -21,7 +21,7 @@
               v-bind:picture="require('@/assets/lorly.jpg')"
               v-bind:name="'Lorly S. Sugal'"
               v-bind:description="'Project Developer'"
-              v-bind:info ="'---Love Yourself and everything will follow. Dream, Believe, Achieve---'"
+              v-bind:info ="'Love Yourself and everything will follow.'"
             ></dev>
           </v-col>
           </v-col>
@@ -32,7 +32,7 @@
               v-bind:picture="require('@/assets/mellyne.jpg')"
               v-bind:name="'Mellyne Grace Nadela'"
               v-bind:description="'Project Developer'"
-              v-bind:info ="'---Trust and Believe in Yourself, cause no one else will. And even own shadow will leave in difficult times---'"
+              v-bind:info ="'Trust and Believe in Yourself, cause no one else will.'"
             ></dev>
             </v-col>
             <v-col>
@@ -41,7 +41,7 @@
               v-bind:picture="require('@/assets/jacky.jpg')"
               v-bind:name="'Jakeniel Erim'"
               v-bind:description="'Project Developer'"
-              v-bind:info ="'-----A negative mind will never give you a positive life-----'"
+              v-bind:info ="'A negative mind will never give you a positive life'"
             ></dev>
             </v-col>
           </v-col>
