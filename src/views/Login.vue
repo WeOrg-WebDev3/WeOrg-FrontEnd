@@ -77,10 +77,15 @@ export default {
         })
         .then(response => {
           console.log(response.data,'data')
-          this.$router.push({ path: "personalAccount" });
+          
           console.log(response.data);
+          if(response.data.auth == true){
+          this.$router.push({ path: "personalAccount" });
           sessionStorage.setItem("token", response.data.token);
           sessionStorage.setItem("id", response.data.id);
+          }else{
+            alert("Invalid Password and Email")
+          }
         });
     }
   },

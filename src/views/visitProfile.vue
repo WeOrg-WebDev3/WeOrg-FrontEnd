@@ -2,7 +2,6 @@
 <template>
   <div>
     <topNavUser/>
-
     <div id="bg">
       <v-container fluid>
         <v-row dense>
@@ -15,30 +14,31 @@
               ></v-img>
               <br>
               <center>
-                <h1>Mellyne Grace R. Nadela</h1>
+               <h1>{{orgs[0].name}}</h1>
               </center>
               <hr>
               <h2 style="margin-left:50px">Personal Information</h2>
               <br>
               <div style="margin-left:20px">
                 <v-icon>mdi-map-marker</v-icon>
-                <span>Lumapao Canlaon City, Negros Oriental</span>
+                <span>{{orgs[0].address}}</span>
                 <br>
                 <v-icon>mdi-email</v-icon>
-                <span>mgnadela@gmail.com</span>
+                <span>{{orgs[0].email}}</span>
                 <br>
                 <v-icon>mdi-cellphone-iphone</v-icon>
-                <span>09756818441</span>
+                <span>{{orgs[0].contact}}</span>
                 <br>
 
                 <v-icon>mdi-calendar-today</v-icon>
-                <span>Wedding</span>
+
+                <span>{{orgs[0].event}}</span>
                 <br>
                 <v-icon>mdi-cash</v-icon>
-                <span>1000-2000</span>
+                <span>{{orgs[0].price}}</span>
                 <br>
                 <v-icon>mdi-gift</v-icon>
-                <span>Free Picturial</span>
+                <span>{{orgs[0].packages}}</span>
                 <br>
               </div>
 
@@ -140,10 +140,12 @@
   </div>
 </template>
 <script>
-import topNavUser from "../views/topNavUser.vue";
+import topNavUser from "../views/topNav.vue";
 export default {
+  name:"visitProfile",
   data() {
     return {
+      orgs:[],
       valid: true,
       dialog: false,
       name: "",
@@ -164,7 +166,29 @@ export default {
   },
   components: {
     topNavUser
+  },
+  mounted(){
+    var orgs = [];
+    let id = sessionStorage.getItem("id");
+    this.axios
+      .post(`http://localhost:8002/retriveprofile/${id}`)
+      .then(response => {
+        console.log(response);
+        var dataT = response.data;
+         orgs.push(dataT);
+        //}
+        // console.log(org);
+        this.orgs = orgs;
+        //console.log(orgs[0],'array')
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    return orgs;
   }
+
+  
 };
 </script>
 

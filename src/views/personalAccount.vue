@@ -1,22 +1,20 @@
 
 <template>
   <div>
-  <v-bottom-navigation dark shift>
-    <v-btn icon>
-      <span>HOME</span>
-      <v-icon >mdi-home</v-icon>
-    </v-btn>
-    
+    <v-bottom-navigation dark shift>
+      <v-btn icon>
+        <span>HOME</span>
+        <v-icon>mdi-home</v-icon>
+      </v-btn>
 
-    
-    <v-btn icon >
-      <span> View Inqueries</span>
-      <v-icon>mdi-login</v-icon>
-    </v-btn>
-    <v-btn icon>
-      <span >View Porfolio</span>
-      <v-icon  a:href="#porfolio">mdi-clipboard-account</v-icon>
-    </v-btn>
+      <v-btn icon>
+        <span>View Inqueries</span>
+        <v-icon>mdi-login</v-icon>
+      </v-btn>
+      <v-btn icon>
+        <span>View Porfolio</span>
+        <v-icon a:href="#porfolio">mdi-clipboard-account</v-icon>
+      </v-btn>
     </v-bottom-navigation>
 
     <div id="bg">
@@ -35,120 +33,143 @@
                 src="../assets/cons.jpg"
                 style="height:220px;width:200px;possition:relative;margin-top:-10%;margin-left:42.5%"
               ></v-img>
-              <br />
+              <br>
               <center>
                 <h1>{{orgs[0].name}}</h1>
               </center>
-              <hr />
+              <hr>
               <h2 style="margin-left:50px">Personal Information</h2>
-              <br />
+              <br>
               <div style="margin-left:20px">
                 <v-icon>mdi-map-marker</v-icon>
                 <span>{{orgs[0].address}}</span>
-                <br />
+                <br>
                 <v-icon>mdi-email</v-icon>
                 <span>{{orgs[0].email}}</span>
-                <br />
+                <br>
                 <v-icon>mdi-cellphone-iphone</v-icon>
                 <span>{{orgs[0].contact}}</span>
-                <br />
+                <br>
 
                 <v-icon>mdi-calendar-today</v-icon>
 
                 <span>{{orgs[0].event}}</span>
-                <br />
+                <br>
                 <v-icon>mdi-cash</v-icon>
                 <span>{{orgs[0].price}}</span>
-                <br />
+                <br>
                 <v-icon>mdi-gift</v-icon>
                 <span>{{orgs[0].packages}}</span>
-                <br />
+                <br>
                 <v-card-actions>
-                 <template>
-          <v-row justify="center">
-            <v-dialog v-model="dialog" persistent max-width="600px">
-              <template v-slot:activator="{ on }">
-                <v-btn color="primary" max-width="30%" dark v-on="on">Edit</v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <span class="headline">Edit Profile</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                     <v-form ref="form" v-model="valid">
-                       <v-text-field v-model="name" :rules="nameRules" label="Name" required></v-text-field>
-                      <v-text-field v-model="address" :rules="nameRules" label="Address" required></v-text-field>
-                      <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-                       <v-text-field
-                        v-model="contact"
-                        :rules="numberRules"
-                        label="Contact Number"
-                        type="number"
-                        min="0"
-                        required
-                      ></v-text-field>
-                      
-                      <v-text-field v-model="price" label="Fee Range" type="number" min="1" required></v-text-field>
-                      <v-text-field
-                        v-model="packages"
-                        :rules="packageRules"
-                        label="Package"
-                        required
-                      ></v-text-field>
-                      
-                     </v-form>
-                  </v-container>
-                 
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="dialog = false" width="50%">Close</v-btn>
-                  <v-btn color="blue darken-1" text @click="dialog = false" width="50%">Save</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-row>
-        </template>
+                  <template>
+                    <v-row justify="center">
+                      <v-dialog v-model="dialog" persistent max-width="600px">
+                        <template v-slot:activator="{ on }">
+                          <v-btn color="primary" max-width="30%" dark v-on="on">Edit</v-btn>
+                        </template>
+                        <v-card>
+                          <v-card-title>
+                            <span class="headline">Edit Profile</span>
+                          </v-card-title>
+                          <v-card-text>
+                            <v-container>
+                              <v-form ref="form" v-model="valid">
+                                <v-text-field
+                                  v-model="ename"
+                                  :rules="nameRules"
+                                  label="Name"
+                                  required
+                                ></v-text-field>
+                                <v-text-field
+                                  v-model="eaddress"
+                                  :rules="nameRules"
+                                  label="Address"
+                                  required
+                                ></v-text-field>
+                               
+                                <v-text-field
+                                  v-model="econtact"
+                                  :rules="numberRules"
+                                  label="Contact Number"
+                                  type="number"
+                                  min="0"
+                                  required
+                                ></v-text-field>
+
+                                <v-text-field
+                                  v-model="eprice"
+                                  label="Fee Range"
+                                  type="number"
+                                  min="1"
+                                  required
+                                ></v-text-field>
+                                <v-text-field
+                                  v-model="epackages"
+                                  :rules="packageRules"
+                                  label="Package"
+                                  required
+                                ></v-text-field>
+                              </v-form>
+                            </v-container>
+                          </v-card-text>
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                              color="blue darken-1"
+                              text
+                              @click="dialog = false"
+                              width="50%"
+                            >Close</v-btn>
+                            <v-btn
+                              color="blue darken-1"
+                              text
+                              @click="dialog = false,saveEdit()"
+                              width="50%"
+                            >Save</v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
+                    </v-row>
+                  </template>
                 </v-card-actions>
               </div>
             </v-card>
           </v-col>
         </v-row>
-        
       </v-container>
 
-      <hr />
+      <hr>
 
       <template>
-        <div >
-        <v-row style="width:90%;margin-left:5%;margin-right:5%;margin-top:5%">
-          <v-col>
-            <v-card>
-              <v-container fluid>
-                <h2 id="porfolio">My Porfolio</h2>
-                <v-row>
-                  <v-col v-for="n in 9" :key="n" class="d-flex child-flex" cols="4">
-                    <v-card flat tile class="d-flex">
-                      <v-img
-                        :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-                        :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
-                        aspect-ratio="1"
-                        class="grey lighten-2"
-                      >
-                        <template v-slot:placeholder>
-                          <v-row class="fill-height ma-0" align="center" justify="center">
-                            <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                          </v-row>
-                        </template>
-                      </v-img>
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card>
-          </v-col>
-        </v-row>
+        <div>
+          <v-row style="width:90%;margin-left:5%;margin-right:5%;margin-top:5%">
+            <v-col>
+              <v-card>
+                <v-container fluid>
+                  <h2 id="porfolio">My Porfolio</h2>
+                  <v-row>
+                    <v-col v-for="n in 9" :key="n" class="d-flex child-flex" cols="4">
+                      <v-card flat tile class="d-flex">
+                        <v-img
+                          :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
+                          :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+                          aspect-ratio="1"
+                          class="grey lighten-2"
+                        >
+                          <template v-slot:placeholder>
+                            <v-row class="fill-height ma-0" align="center" justify="center">
+                              <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                            </v-row>
+                          </template>
+                        </v-img>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card>
+            </v-col>
+          </v-row>
         </div>
       </template>
     </div>
@@ -157,48 +178,39 @@
 
     
 <script>
-
 export default {
   name: "",
   data() {
     return {
       orgs: [],
-       dialog: false,
-       valid: true,
-    name: "",
-    nameRules: [v => !!v || "Name is required"],
-    contact: "",
-    numberRules: [
-      v => !!v || "Contact Number is required",
-      v => (v && v.length <= 11) || "Name must be less  11 numbers",
-      v => (v && v.length >= 11) || "Name must be less  11 numbers"
-    ],
-    packages: "",
-    packageRules: [v => !!v || "Package is important"],
-    password: "",
-    passwordRules: [
-      v => !!v || "password  is required",
-      v => (v && v.length >= 8) || "Name must be less  8 numbers"
-    ],
-    email: "",
-    emailRules: [
-      v => !!v || "E-mail is required",
-      v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-    ],
-    event: "",
-    eventRules: [
-      v => !!v || "Event is required",
-      v =>
-        v == "Birthday" ||
-        v == "birthday" ||
-        v == "Wedding" ||
-        v == "wedding" ||
-        v == "Concert" ||
-        v == "concert" ||
-        "Events must be (Birthday,Wedding or Concert)"
-    ],
-    price:"",
-    address:""
+      dialog: false,
+      valid: true,
+      ename: "",
+      nameRules: [v => !!v || "Name is required"],
+      econtact: "",
+      numberRules: [
+        v => !!v || "Contact Number is required",
+        v => (v && v.length <= 11) || "Name must be less  11 numbers",
+        v => (v && v.length >= 11) || "Name must be less  11 numbers"
+      ],
+      epackages: "",
+      packageRules: [v => !!v || "Package is important"],
+
+     
+      eevent: "",
+      eventRules: [
+        v => !!v || "Event is required",
+        v =>
+          v == "Birthday" ||
+          v == "birthday" ||
+          v == "Wedding" ||
+          v == "wedding" ||
+          v == "Concert" ||
+          v == "concert" ||
+          "Events must be (Birthday,Wedding or Concert)"
+      ],
+      eprice: "",
+      eaddress: ""
     };
   },
 
@@ -221,11 +233,28 @@ export default {
           this.$swal("Cancelled", "info");
         }
       });
+    },
+    saveEdit() {
+      let id = sessionStorage.getItem("id");
+      console.log(id, "hghghgh");
+      let editCred = {
+        name: this.ename,
+        address: this.eaddress,
+       
+        contact: this.econtact,
+        event: this.eevent,
+        price: this.eprice,
+        package: this.epackages
+      };
+      this.axios
+        .put(`http://localhost:8002/Update/${id}`, editCred)
+        .then(response => {
+          console.log(response);
+        });
+        
     }
   },
-  components: {
-    
-  },
+  components: {},
   mounted() {
     var orgs = [];
     let id = sessionStorage.getItem("id");
@@ -260,6 +289,7 @@ export default {
 
     return orgs;
   }
+  
   // this.axios.get(`http://localhost:8002/retriveprofile/${id}`).then(
   //   response=>{
   //     console.log(response.data)
