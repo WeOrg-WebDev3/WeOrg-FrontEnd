@@ -14,7 +14,7 @@
               ></v-img>
               <br>
               <center>
-               <h1>{{orgs[0].name}}</h1>
+                <h1>{{orgs[0].name}}</h1>
               </center>
               <hr>
               <h2 style="margin-left:50px">Personal Information</h2>
@@ -52,48 +52,47 @@
                       <v-card class="elevation-12">
                         <v-toolbar color="secondary" dark flat>
                           <v-toolbar-title>INQUIRE</v-toolbar-title>
-                          
                         </v-toolbar>
                         <v-card-text>
                           <v-form ref="form" v-model="valid">
-                            <v-text-field v-model="name" :rules="nameRules" label="Name" required></v-text-field>
+                            <v-text-field v-model="iname" :rules="nameRules" label="Name" required></v-text-field>
                             <v-text-field
-                              v-model="address"
+                              v-model="iaddress"
                               :rules="nameRules"
                               label="Address"
                               required
                             ></v-text-field>
-                            <v-text-field
-                              v-model="email"
-                              :rules="emailRules"
-                              label="E-mail"
-                              required
-                            ></v-text-field>
 
                             <v-text-field
-                              v-model="contact"
+                              v-model="icontact"
                               :rules="numberRules"
                               label="Contact Number"
                               type="number"
                               min="0"
                               required
                             ></v-text-field>
+                            
+                           
                             <v-textarea
-                              v-model="message"
+                              v-model="imessage"
                               outlined
                               name="input-7-4"
                               label="Write Message"
                             ></v-textarea>
 
                             <v-card-actions>
-                             
                               <v-btn
                                 color="secondary"
                                 width="50%"
                                 text
                                 @click="dialog = false"
                               >Close</v-btn>
-                              <v-btn color="primary" width="50%" text @click="dialog = false">Send</v-btn>
+                              <v-btn
+                                color="primary"
+                                width="50%"
+                                text
+                                @click="dialog = false;addInquery()"
+                              >Send</v-btn>
                             </v-card-actions>
                           </v-form>
                         </v-card-text>
@@ -142,14 +141,15 @@
 <script>
 import topNavUser from "../views/topNav.vue";
 export default {
-  name:"visitProfile",
+  name: "visitProfile",
   data() {
     return {
-      orgs:[],
+      orgs: [],
       valid: true,
       dialog: false,
       name: "",
-      msg: "",
+      message: "",
+     
       nameRules: [v => !!v || "Name is required"],
       contact: "",
       numberRules: [
@@ -161,13 +161,39 @@ export default {
       emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-      ]
+      ],
+     
     };
   },
   components: {
     topNavUser
   },
-  mounted(){
+  methods: {
+    addInquery() {
+      let id = sessionStorage.getItem("orgId");
+      alert(id)
+      let inquer = {
+        name:this.iname,
+        address:this.iaddress,
+        email:this.iemail,
+        contact:this.icontact,
+        message:this.imessage
+      }
+      this.axios
+        .post(`http://localhost:8002/retriveinquiries/${id}`,inquer)
+        .then(response => {
+          console.log(response);
+          
+          //console.log(orgs[0],'array')
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+     
+    }
+  },
+  mounted() {
     var orgs = [];
     let id = sessionStorage.getItem("id");
     this.axios
@@ -175,7 +201,7 @@ export default {
       .then(response => {
         console.log(response);
         var dataT = response.data;
-         orgs.push(dataT);
+        orgs.push(dataT);
         //}
         // console.log(org);
         this.orgs = orgs;
@@ -187,8 +213,6 @@ export default {
 
     return orgs;
   }
-
-  
 };
 </script>
 

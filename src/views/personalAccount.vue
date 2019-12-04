@@ -67,6 +67,11 @@
                       <v-dialog v-model="dialog" persistent max-width="600px">
                         <template v-slot:activator="{ on }">
                           <v-btn color="primary" max-width="30%" dark v-on="on">Edit</v-btn>
+                          <v-btn
+                            color="primary"
+                            max-width="30%"
+                            v-on:click="viewInquires()"
+                          >View Inquires</v-btn>
                         </template>
                         <v-card>
                           <v-card-title>
@@ -87,7 +92,7 @@
                                   label="Address"
                                   required
                                 ></v-text-field>
-                               
+
                                 <v-text-field
                                   v-model="econtact"
                                   :rules="numberRules"
@@ -133,6 +138,13 @@
                     </v-row>
                   </template>
                 </v-card-actions>
+                <v-container fluid style="width:70%">
+                  <v-data-table :headers="headers" :items="inquery">
+                    <template v-slot:item.action="{ item }">
+                      <v-btn @click="retrieveOrg(item.id)">View Profile</v-btn>
+                    </template>
+                  </v-data-table>
+                </v-container>
               </div>
             </v-card>
           </v-col>
@@ -183,6 +195,7 @@ export default {
   data() {
     return {
       orgs: [],
+      inquery: [],
       dialog: false,
       valid: true,
       ename: "",
@@ -196,7 +209,6 @@ export default {
       epackages: "",
       packageRules: [v => !!v || "Package is important"],
 
-     
       eevent: "",
       eventRules: [
         v => !!v || "Event is required",
@@ -210,7 +222,20 @@ export default {
           "Events must be (Birthday,Wedding or Concert)"
       ],
       eprice: "",
-      eaddress: ""
+      eaddress: "",
+      headers: [
+        {
+          text: "Name",
+          align: "left",
+          sortable: false,
+          value: "name"
+        },
+  
+        { text: "Address", value: "address", sortable: false },
+        { text: "Contact", value: "contact", sortable: false },
+
+        { text: "Message", value: "message", sortable: false }
+      ]
     };
   },
 
@@ -240,7 +265,7 @@ export default {
       let editCred = {
         name: this.ename,
         address: this.eaddress,
-       
+
         contact: this.econtact,
         event: this.eevent,
         price: this.eprice,
@@ -251,7 +276,36 @@ export default {
         .then(response => {
           console.log(response);
         });
-        
+    },
+    viewInquires() {
+      var inquery = [];
+     
+      let id = sessionStorage.getItem("id");
+      this.axios
+        .post(`http://localhost:8002/retriveprofile/${id}`)
+        .then(response => {
+          
+          var dataT = response.data.inquires;
+          console.log(dataT,"shdjhs")
+          var counter = 0;
+
+          for (counter; counter < dataT.length; counter++) {
+            inquery.push({
+              name: dataT[counter].name,
+              address: dataT[counter].address,
+              contact: dataT[counter].contact,
+              message:dataT[counter].message
+            });
+          }
+          // console.log(org);
+          this.inquery = inquery;
+          console.log(inquery,"final")
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+      return inquery;
     }
   },
   components: {},
@@ -263,56 +317,27 @@ export default {
       .then(response => {
         console.log(response);
         var dataT = response.data;
-        // this.org = dataT
-        //var counter = 0;
-
-        //for (counter; counter < dataT.length; counter++) {
-        // orgs.push({
-        //   name: dataT.name,
-        //   address: dataT.address,
-        //   email: dataT.email,
-        //   contact: dataT.contact,
-        //   event: dataT.event,
-        //    price: dataT.price,
-        //     packages: dataT.packages,
-
-        // });
         orgs.push(dataT);
-        //}
-        // console.log(org);
         this.orgs = orgs;
-        //console.log(orgs[0],'array')
       })
       .catch(error => {
         console.log(error);
       });
-
     return orgs;
   }
-  
-  // this.axios.get(`http://localhost:8002/retriveprofile/${id}`).then(
-  //   response=>{
-  //     console.log(response.data)
 };
 </script>
-
-
-
-
 <style scoped>
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   max-width: 1000px;
   margin: auto;
-
   font-family: arial;
 }
-
 .title {
   color: grey;
   font-size: 18px;
 }
-
 button {
   border: none;
   outline: 0;
@@ -325,42 +350,34 @@ button {
   width: 100%;
   font-size: 18px;
 }
-
 a {
   text-decoration: none;
   font-size: 22px;
   color: black;
 }
-
 button:hover,
 a:hover {
   opacity: 0.7;
 }
-
 p {
   font-size: medium;
 }
 img {
   width: 300px;
 }
-
 .row {
   display: flex;
   flex-wrap: wrap;
   padding: 0 4px;
 }
-
-/* Create two equal columns that sits next to each other */
 .column {
   flex: 50%;
   padding: 0 4px;
 }
-
 .column img {
   margin-top: 8px;
   vertical-align: middle;
 }
-
 #bg {
   height: 100%;
   width: 100%;

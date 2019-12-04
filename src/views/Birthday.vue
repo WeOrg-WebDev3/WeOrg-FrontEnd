@@ -69,7 +69,7 @@ export default {
     },
     retrieveOrg(item){
      this.$router.push({ path: "visitProfile" });
-    sessionStorage.setItem("id", item);
+    sessionStorage.setItem("orgId", item);
      
       
       

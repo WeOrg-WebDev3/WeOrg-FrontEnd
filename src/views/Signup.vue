@@ -138,7 +138,8 @@ export default {
             contact: this.contact,
             event: this.event,
             price: this.price,
-            packages: this.packages
+            packages: this.packages,
+            inquires:[]
           })
           .then(response => {
             this.$router.push({ path: "Login" });
