@@ -114,6 +114,12 @@ import { Carousel, Slide } from 'vue-carousel';
 import topNav from "../views/topNav.vue";
 
 export default {
+  data(){
+    return{
+      name:"home",
+      
+    }
+  },
   methods: {
     Concert() {
       this.$router.push({ path: "Concert" });

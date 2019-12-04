@@ -1,8 +1,8 @@
 <template>
   <div> 
-    <v-system-bar height="250%" id="bg"></v-system-bar>
-    <v-img src="../assets/weOrg.png" style="heigth:20%;width:20%;position:relative;margin-top:10px%;margin-bottom:-2%"></v-img>
-     
+    <v-system-bar height="150%" id="bg"></v-system-bar>
+    <!-- <v-img src="../assets/weOrg.png" style="heigth:20%;width:20%;position:relative;margin-top:10px%;margin-bottom:-2%"></v-img>
+      -->
         
      
     <!-- <v-app-bar color="grey" dark prominent>
