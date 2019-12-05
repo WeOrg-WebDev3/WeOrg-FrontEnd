@@ -2,18 +2,9 @@
 <template>
   <div>
     <v-bottom-navigation dark shift>
-      <v-btn icon>
-        <span>HOME</span>
-        <v-icon>mdi-home</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <span>View Inqueries</span>
-        <v-icon>mdi-login</v-icon>
-      </v-btn>
-      <v-btn icon>
-        <span>View Porfolio</span>
-        <v-icon a:href="#porfolio">mdi-clipboard-account</v-icon>
+      <v-btn icon style="margin-left:90%" v-on:click="goto('/Home')">
+        <span>Logout</span>
+        <v-icon>mdi-logout</v-icon>
       </v-btn>
     </v-bottom-navigation>
 
@@ -23,14 +14,9 @@
           <v-col cols="6" sm="12">
             <v-card>
               <v-img src="../assets/wed.png" class="white--text align-end" height="300px"></v-img>
-              <v-btn
-                style="position:relative;margin-top:-48%;width:10%;margin-left:89%"
-                color="red"
-                v-on:click="goto('/Home')"
-              >Logout</v-btn>
 
               <v-img
-                src="../assets/cons.jpg"
+                :src="`http://localhost:8002/files/${orgs[0].img}`"
                 style="height:220px;width:200px;possition:relative;margin-top:-10%;margin-left:42.5%"
               ></v-img>
               <br>
@@ -230,7 +216,7 @@ export default {
           sortable: false,
           value: "name"
         },
-  
+
         { text: "Address", value: "address", sortable: false },
         { text: "Contact", value: "contact", sortable: false },
 
@@ -241,23 +227,9 @@ export default {
 
   methods: {
     goto(link) {
-      this.$swal({
-        title: "Are you sure you Want to logout?",
-        text: "You can't revert your action",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Yes!",
-        cancelButtonText: "Cancel",
-        showCloseButton: true,
-        showLoaderOnConfirm: true
-      }).then(result => {
-        if (result.value) {
-          this.$swal("Logout", "You successfully Logout", "success");
-          this.$router.push({ path: link });
-        } else {
-          this.$swal("Cancelled", "info");
-        }
-      });
+      alert("Successfully Logout")
+      this.$router.push({ path: link });
+      
     },
     saveEdit() {
       let id = sessionStorage.getItem("id");
@@ -279,14 +251,13 @@ export default {
     },
     viewInquires() {
       var inquery = [];
-     
+
       let id = sessionStorage.getItem("id");
       this.axios
         .post(`http://localhost:8002/retriveprofile/${id}`)
         .then(response => {
-          
           var dataT = response.data.inquires;
-          console.log(dataT,"shdjhs")
+          console.log(dataT, "shdjhs");
           var counter = 0;
 
           for (counter; counter < dataT.length; counter++) {
@@ -294,12 +265,12 @@ export default {
               name: dataT[counter].name,
               address: dataT[counter].address,
               contact: dataT[counter].contact,
-              message:dataT[counter].message
+              message: dataT[counter].message
             });
           }
           // console.log(org);
           this.inquery = inquery;
-          console.log(inquery,"final")
+          console.log(inquery, "final");
         })
         .catch(error => {
           console.log(error);
@@ -315,10 +286,9 @@ export default {
     this.axios
       .post(`http://localhost:8002/retriveprofile/${id}`)
       .then(response => {
-        console.log(response);
+        console.log(response.data);
         var dataT = response.data;
-        orgs.push(dataT);
-        this.orgs = orgs;
+        this.orgs.push(dataT);
       })
       .catch(error => {
         console.log(error);

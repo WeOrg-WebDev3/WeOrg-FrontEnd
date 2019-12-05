@@ -40,7 +40,7 @@
                         label="Package"
                         required
                       ></v-text-field>
-                      <v-text-field v-model="photo" label="Photo" type="file" required></v-text-field>
+                      <v-file-input v-model="img" label="Profile Picture" type="file" required></v-file-input>
                     </v-form>
                   </template>
                 </v-card-text>
@@ -69,7 +69,7 @@ export default {
   data: () => ({
     address: "",
     price: "",
-    photo: "",
+    img: null,
     items: [
       {
         text: "Birthday"
@@ -126,11 +126,13 @@ export default {
         this.contact != "" &&
         this.event != "" &&
         this.price != "" &&
-        this.packages != ""
+        this.packages != "" &&
+        this.img
       ) {
-        console.log(this.address);
-        this.axios
-          .post("http://localhost:8002/account", {
+        let uploads = new FormData();
+        uploads.append('img',this.img)
+        uploads.append("details",JSON.stringify(
+          {
             name: this.name,
             address: this.address,
             email: this.email,
@@ -140,7 +142,10 @@ export default {
             price: this.price,
             packages: this.packages,
             inquires:[]
-          })
+          }
+        ))
+        this.axios
+          .post("http://localhost:8002/account", uploads, {headers: {'Content-Type': 'multipart/form-data' }})
           .then(response => {
             this.$router.push({ path: "Login" });
             console.log(response);

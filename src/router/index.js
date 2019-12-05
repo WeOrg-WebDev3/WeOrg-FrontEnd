@@ -9,6 +9,7 @@ import Concert from "../views/Concert.vue";
 import Birthday from "../views/Birthday.vue";
 import Wedding from "../views/Wedding.vue"
 import visitProfile from "../views/visitProfile.vue"
+import Search from "../views/Search.vue"
 
 
 Vue.use(VueRouter);
@@ -70,6 +71,11 @@ const routes = [
     path: "/visitProfile",
     name: "visitProfile",
     component: visitProfile
+  },
+  {
+    path: "/search",
+    name: "search",
+    component: Search
   },
   
 ];

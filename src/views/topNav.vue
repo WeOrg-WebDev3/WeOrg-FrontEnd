@@ -5,13 +5,11 @@
       <span>HOME</span>
       <v-icon @click="goto('/Home')">mdi-home</v-icon>
     </v-btn>
-    <v-col cols="12" sm="2" style="margin-top:-20px">
-      <v-text-field label="SEARCH" single-line></v-text-field>
-    </v-col>
+   
 
     <v-btn icon>
       <span>Search</span>
-      <v-icon v-on:click="searchOne()">mdi-magnify</v-icon>
+      <v-icon v-on:click="goto('/search')">mdi-magnify</v-icon>
     </v-btn>
     <v-btn icon style="margin-left:20%">
       <span>Login</span>

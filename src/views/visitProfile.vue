@@ -147,21 +147,19 @@ export default {
       orgs: [],
       valid: true,
       dialog: false,
-      name: "",
-      message: "",
+      iname: "",
+      imessage: "",
+      iaddress:"",
+
      
       nameRules: [v => !!v || "Name is required"],
-      contact: "",
+      icontact: "",
       numberRules: [
         v => !!v || "Contact Number is required",
         v => (v && v.length <= 11) || "Name must be less  11 numbers",
         v => (v && v.length >= 11) || "Name must be less  11 numbers"
       ],
-      email: "",
-      emailRules: [
-        v => !!v || "E-mail is required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-      ],
+     
      
     };
   },
@@ -195,7 +193,7 @@ export default {
   },
   mounted() {
     var orgs = [];
-    let id = sessionStorage.getItem("id");
+    let id = sessionStorage.getItem("orgId");
     this.axios
       .post(`http://localhost:8002/retriveprofile/${id}`)
       .then(response => {

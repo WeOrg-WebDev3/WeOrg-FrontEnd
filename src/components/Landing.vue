@@ -50,7 +50,7 @@
             <v-flex fluid>
               <h1 style="text-align:center;font-size:48px  ">WeOrg</h1>
               </v-flex>
-              <p style="text-align:center;font-size:24px">Is a web application that aids the Organizer from the the different fields of event to accomodate clients to eliminate time and effort to find for clients. Clients has the highest benefit since it would be easy for them to access different services in a much easy way.</p>
+              <p style="text-align:center;font-size:24px">Is a web application that aids the Organizer from the the different fields of event to accomodate clients to eliminate time and effort to find for clients. Clients has the highest benefit since it would be easy for them to acquire different services in a much easier way.</p>
       </v-row>
       <v-row >
         <carousel :per-page="7"  :mouse-drag="true">

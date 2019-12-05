@@ -5,6 +5,7 @@
   <v-container fluid style="width:70%">
     <v-data-table :headers="headers" :items="org">
       <template v-slot:item.action="{ item }">
+        
      
       <v-btn @click="retrieveOrg(item.id)">View Profile</v-btn>
      
@@ -58,7 +59,7 @@ export default {
               id:dataT[counter]._id
             });
           }
-          // console.log(org);
+          console.log(org);
           this.org = org;
         })
         .catch(error => {
@@ -70,6 +71,7 @@ export default {
     retrieveOrg(item){
      this.$router.push({ path: "visitProfile" });
     sessionStorage.setItem("orgId", item);
+    alert(item)
      
       
       
