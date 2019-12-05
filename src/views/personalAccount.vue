@@ -19,34 +19,34 @@
                 :src="`http://localhost:8002/files/${orgs[0].img}`"
                 style="height:220px;width:200px;possition:relative;margin-top:-10%;margin-left:42.5%"
               ></v-img>
-              <br />
+              <br>
               <center>
                 <h1>{{orgs[0].name}}</h1>
               </center>
-              <hr />
+              <hr>
               <h2 style="margin-left:50px">Personal Information</h2>
-              <br />
+              <br>
               <div style="margin-left:20px">
                 <v-icon>mdi-map-marker</v-icon>
                 <span>{{orgs[0].address}}</span>
-                <br />
+                <br>
                 <v-icon>mdi-email</v-icon>
                 <span>{{orgs[0].email}}</span>
-                <br />
+                <br>
                 <v-icon>mdi-cellphone-iphone</v-icon>
                 <span>{{orgs[0].contact}}</span>
-                <br />
+                <br>
 
                 <v-icon>mdi-calendar-today</v-icon>
 
                 <span>{{orgs[0].event}}</span>
-                <br />
+                <br>
                 <v-icon>mdi-cash</v-icon>
                 <span>{{orgs[0].price}}</span>
-                <br />
+                <br>
                 <v-icon>mdi-gift</v-icon>
                 <span>{{orgs[0].packages}}</span>
-                <br />
+                <br>
                 <v-card-actions>
                   <template>
                     <v-row justify="center">
@@ -137,7 +137,7 @@
         </v-row>
       </v-container>
 
-      <hr />
+      <hr>
 
       <template>
         <div>
@@ -147,14 +147,11 @@
                 <v-container fluid>
                   <h2 id="porfolio">My Porfolio</h2>
                   <v-row>
+                    <v-file-input v-model="imgP" label="Documentation" type="file" required></v-file-input>
+                    <br><v-btn @click="addPhoto()" color="primary" style="width:50%">Add Photo</v-btn>
                     <v-col v-for="n in 9" :key="n" class="d-flex child-flex" cols="4">
                       <v-card flat tile class="d-flex">
-                        <v-img
-                          :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-                          :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
-                          aspect-ratio="1"
-                          class="grey lighten-2"
-                        >
+                        <v-img>
                           <template v-slot:placeholder>
                             <v-row class="fill-height ma-0" align="center" justify="center">
                               <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
@@ -182,6 +179,8 @@ export default {
     return {
       orgs: [],
       inquery: [],
+      
+     
       dialog: false,
       valid: true,
       ename: "",
@@ -227,9 +226,8 @@ export default {
 
   methods: {
     goto(link) {
-      alert("Successfully Logout")
+      alert("Successfully Logout");
       this.$router.push({ path: link });
-      
     },
     saveEdit() {
       let id = sessionStorage.getItem("id");
@@ -237,7 +235,6 @@ export default {
       let editCred = {
         name: this.ename,
         address: this.eaddress,
-
         contact: this.econtact,
         event: this.eevent,
         price: this.eprice,
@@ -277,6 +274,24 @@ export default {
         });
 
       return inquery;
+    },
+    addPhoto() {
+     
+      let id = sessionStorage.getItem("id");
+      alert(id);
+      let uploads = new FormData();
+        uploads.append('imgP',this.imgP)
+     
+      this.axios
+        .post(`http://localhost:8002/retrivephoto/${id}`, uploads,{headers: {'Content-Type': 'multipart/form-data' }})
+        .then(response => {
+          console.log(response.data.randomphoto,"dhkjash");
+
+        
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   },
   components: {},
@@ -284,7 +299,7 @@ export default {
     var orgs = [];
     let id = sessionStorage.getItem("id");
     this.axios
-      .post(`http://localhost:8001/retriveprofile/${id}`)
+      .post(`http://localhost:8002/retriveprofile/${id}`)
       .then(response => {
         console.log(response.data);
         var dataT = response.data;

@@ -3,8 +3,10 @@
 <topNav/>
 <div >
   <v-container fluid style="width:70%">
+    <center><h2>{{org[0].event}} Organizers</h2></center>
     <v-data-table :headers="headers" :items="org">
       <template v-slot:item.action="{ item }">
+        
      
       <v-btn @click="retrieveOrg(item.id)">View Profile</v-btn>
      
@@ -31,7 +33,7 @@ export default {
           value: "name"
         },
         { text: "Address", value: "address",sortable: false, },
-        { text: "Contact", value: "id",sortable: false, },
+        { text: "Contact", value: "contact",sortable: false, },
         { text: "Action", value: "action" ,sortable: false,}
       ]
     };
@@ -40,9 +42,9 @@ export default {
   methods: {
     addOrg() {
       var org = [];
-      var event = "Concert";
+      let event=sessionStorage.getItem("orgEvent");
       this.axios
-        .get("http://localhost:8001/retrieveOneEvent/"+ event)
+        .get("http://localhost:8002/retrieveOneEvent/"+ event)
         .then(response => {
           console.log(response);
           var dataT = response.data;
@@ -58,7 +60,7 @@ export default {
               id:dataT[counter]._id
             });
           }
-          // console.log(org);
+          console.log(org);
           this.org = org;
         })
         .catch(error => {
@@ -69,7 +71,8 @@ export default {
     },
     retrieveOrg(item){
      this.$router.push({ path: "visitProfile" });
-    sessionStorage.setItem("id", item);
+    sessionStorage.setItem("orgId", item);
+    alert(item)
      
       
       

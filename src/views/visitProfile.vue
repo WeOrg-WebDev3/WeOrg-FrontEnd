@@ -8,8 +8,8 @@
           <v-col cols="6" sm="12">
             <v-card>
               <v-img src="../assets/wed.png" class="white--text align-end" height="300px"></v-img>
-              <v-img
-                src="../assets/cons.jpg"
+                       <v-img
+                :src="`http://localhost:8002/files/${orgs[0].img}`"
                 style="height:220px;width:200px;possition:relative;margin-top:-10%;margin-left:42.5%"
               ></v-img>
               <br />
@@ -116,12 +116,7 @@
               <v-row>
                 <v-col v-for="n in 9" :key="n" class="d-flex child-flex" cols="4">
                   <v-card flat tile class="d-flex">
-                    <v-img
-                      :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-                      :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
-                      aspect-ratio="1"
-                      class="grey lighten-2"
-                    >
+                    <v-img>
                       <template v-slot:placeholder>
                         <v-row class="fill-height ma-0" align="center" justify="center">
                           <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
@@ -195,7 +190,7 @@ export default {
     var orgs = [];
     let id = sessionStorage.getItem("orgId");
     this.axios
-      .post(`http://localhost:8001/retriveprofile/${id}`)
+      .post(`http://localhost:8002/retriveprofile/${id}`)
       .then(response => {
         console.log(response);
         var dataT = response.data;

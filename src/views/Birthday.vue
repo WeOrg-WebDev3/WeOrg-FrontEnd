@@ -2,7 +2,10 @@
 <div id="bg"> 
 <topNav/>
 <div >
+  
   <v-container fluid style="width:70%">
+    <center> <h1>{{org[0].event}} Organizers</h1></center>
+   
     <v-data-table :headers="headers" :items="org">
       <template v-slot:item.action="{ item }">
         
@@ -32,7 +35,7 @@ export default {
           value: "name"
         },
         { text: "Address", value: "address",sortable: false, },
-        { text: "Contact", value: "id",sortable: false, },
+        { text: "Contact", value: "contact",sortable: false, },
         { text: "Action", value: "action" ,sortable: false,}
       ]
     };

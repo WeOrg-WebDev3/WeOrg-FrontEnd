@@ -11,7 +11,7 @@
         <template v-slot:default>
           <center>
            <v-avatar size="150" style="margin-top:5%" >
-          <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+          <img  :src="`http://localhost:8002/files/${orgs[0].img}`">
         </v-avatar>
         <br>
         <h2 id="name">MEllyne GRace NAdela</h2><br>

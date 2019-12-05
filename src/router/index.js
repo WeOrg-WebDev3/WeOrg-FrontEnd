@@ -5,9 +5,8 @@ import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
 import viewPorfolio from "../views/viewPorfolio.vue";
 import personalAccount from "../views/personalAccount.vue";
-import Concert from "../views/Concert.vue";
-import Birthday from "../views/Birthday.vue";
-import Wedding from "../views/Wedding.vue"
+import eventOrganizer from "../views/eventOrganizer.vue";
+
 import visitProfile from "../views/visitProfile.vue"
 import Search from "../views/Search.vue"
 
@@ -53,20 +52,11 @@ const routes = [
     name: "personalAccount",
     component: personalAccount
   },
+ 
   {
-    path: "/concert", 
-    name: "Concert",
-    component: Concert
-  },
-  {
-    path: "/birthday", 
-    name: "Birthday",
-    component: Birthday
-  },
-  {
-    path: '/wedding', 
-    name: 'Wedding',
-    component: Wedding
+    path: '/eventOrganizer', 
+    name: 'eventOrganizer',
+    component: eventOrganizer
   }, {
     path: "/visitProfile",
     name: "visitProfile",
