@@ -13,40 +13,40 @@
         <v-row dense>
           <v-col cols="6" sm="12">
             <v-card>
-              <v-img src="../assets/wed.png" class="white--text align-end" height="300px"></v-img>
+              <v-img src="../assets/bg.jpg" class="white--text align-end" height="300px"></v-img>
 
               <v-img
-                :src="`http://localhost:8002/files/${orgs[0].img}`"
+                :src="`http://localhost:8002/files/${orgs.img}`"
                 style="height:220px;width:200px;possition:relative;margin-top:-10%;margin-left:42.5%"
               ></v-img>
-              <br>
+              <br />
               <center>
-                <h1>{{orgs[0].name}}</h1>
+                <h1>{{orgs.name}}</h1>
               </center>
-              <hr>
+              <hr />
               <h2 style="margin-left:50px">Personal Information</h2>
-              <br>
+              <br />
               <div style="margin-left:20px">
                 <v-icon>mdi-map-marker</v-icon>
-                <span>{{orgs[0].address}}</span>
-                <br>
+                <span>{{orgs.address}}</span>
+                <br />
                 <v-icon>mdi-email</v-icon>
-                <span>{{orgs[0].email}}</span>
-                <br>
+                <span>{{orgs.email}}</span>
+                <br />
                 <v-icon>mdi-cellphone-iphone</v-icon>
-                <span>{{orgs[0].contact}}</span>
-                <br>
+                <span>{{orgs.contact}}</span>
+                <br />
 
                 <v-icon>mdi-calendar-today</v-icon>
 
-                <span>{{orgs[0].event}}</span>
-                <br>
+                <span>{{orgs.event}}</span>
+                <br />
                 <v-icon>mdi-cash</v-icon>
-                <span>{{orgs[0].price}}</span>
-                <br>
+                <span>{{orgs.price}}</span>
+                <br />
                 <v-icon>mdi-gift</v-icon>
-                <span>{{orgs[0].packages}}</span>
-                <br>
+                <span>{{orgs.packages}}</span>
+                <br />
                 <v-card-actions>
                   <template>
                     <v-row justify="center">
@@ -127,7 +127,7 @@
                 <v-container fluid style="width:70%">
                   <v-data-table :headers="headers" :items="inquery">
                     <template v-slot:item.action="{ item }">
-                      <v-btn @click="retrieveOrg(item.id)">View Profile</v-btn>
+                      <v-btn @click="deleteInq(inquery[0].name)">Delete</v-btn>
                     </template>
                   </v-data-table>
                 </v-container>
@@ -137,7 +137,7 @@
         </v-row>
       </v-container>
 
-      <hr>
+      <hr />
 
       <template>
         <div>
@@ -147,8 +147,9 @@
                 <v-container fluid>
                   <h2 id="porfolio">My Porfolio</h2>
                   <v-row>
-                    <v-file-input v-model="imgP" label="Documentation" type="file" required></v-file-input>
-                    <br><v-btn @click="addPhoto()" color="primary" style="width:50%">Add Photo</v-btn>
+                    <v-file-input label="Documentation" type="file" required></v-file-input>
+                    <br />
+                    <v-btn @click="addPhoto()" color="primary" style="width:50%">Add Photo</v-btn>
                     <v-col v-for="n in 9" :key="n" class="d-flex child-flex" cols="4">
                       <v-card flat tile class="d-flex">
                         <v-img>
@@ -174,13 +175,12 @@
     
 <script>
 export default {
-  name: "",
+  name: "personal",
   data() {
     return {
-      orgs: [],
+      orgs: {},
       inquery: [],
-      
-     
+
       dialog: false,
       valid: true,
       ename: "",
@@ -194,7 +194,7 @@ export default {
       epackages: "",
       packageRules: [v => !!v || "Package is important"],
 
-      eevent: "",
+      
       eventRules: [
         v => !!v || "Event is required",
         v =>
@@ -219,7 +219,8 @@ export default {
         { text: "Address", value: "address", sortable: false },
         { text: "Contact", value: "contact", sortable: false },
 
-        { text: "Message", value: "message", sortable: false }
+        { text: "Message", value: "message", sortable: false },
+        { text: "Action", value: "action", sortable: false }
       ]
     };
   },
@@ -241,9 +242,10 @@ export default {
         package: this.epackages
       };
       this.axios
-        .put(`http://localhost:8001/Update/${id}`, editCred)
+        .put(`http://localhost:8002/Update/${id}`, editCred)
         .then(response => {
           console.log(response);
+          this.getData();
         });
     },
     viewInquires() {
@@ -276,39 +278,55 @@ export default {
       return inquery;
     },
     addPhoto() {
-     
       let id = sessionStorage.getItem("id");
-      alert(id);
+   
       let uploads = new FormData();
-        uploads.append('imgP',this.imgP)
-     
-      this.axios
-        .post(`http://localhost:8002/retrivephoto/${id}`, uploads,{headers: {'Content-Type': 'multipart/form-data' }})
-        .then(response => {
-          console.log(response.data.randomphoto,"dhkjash");
 
-        
+      this.axios
+        .post(`http://localhost:8002/retrivephoto/${id}`, uploads, {
+          headers: { "Content-Type": "multipart/form-data" }
+        })
+        .then(response => {
+          console.log(response.data.randomphoto, "dhkjash");
         })
         .catch(error => {
           console.log(error);
         });
-    }
-  },
-  components: {},
-  mounted() {
-    var orgs = [];
+    },
+    deleteInq(Iemail) {
+     
+      this.axios
+        .delete("http://localhost:8002/deleteInquiry/" + Iemail)
+        .then(response => {
+
+          const index = this.inquery.indexOf(Iemail)
+        confirm('Are you sure you want to delete this inquiry?') && this.inquery.splice(index, 1)
+          console.log(Iemail, "dhkjash");
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    getData() {
+      var orgs = [];
+     
     let id = sessionStorage.getItem("id");
     this.axios
       .post(`http://localhost:8002/retriveprofile/${id}`)
       .then(response => {
         console.log(response.data);
         var dataT = response.data;
-        this.orgs.push(dataT);
+        this.orgs = dataT;
       })
       .catch(error => {
         console.log(error);
       });
-    return orgs;
+    }
+  },
+  components: {},
+  created() {
+    window.addEventListener("getData", this.getData);
+    this.getData();
   }
 };
 </script>

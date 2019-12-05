@@ -284,7 +284,7 @@ export default {
   methods: {
     goto(event) {
       sessionStorage.setItem("orgEvent", event);
-      alert(event)
+    
       this.$router.push({ path: "eventOrganizer" });
     },
     
