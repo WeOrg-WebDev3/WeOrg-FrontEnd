@@ -55,79 +55,50 @@
           <v-flex fluid>
             <h1 style="text-align:center;font-size:48px  ">WeOrg</h1>
           </v-flex>
-          <p
-            style="text-align:center;font-size:24px"
-          >Is a web application that aids the Organizer from the the different fields of event to accomodate clients to eliminate time and effort to find for clients. Clients has the highest benefit since it would be easy for them to access different services in a much easy way.</p>
         </v-row>
+         <v-row>
+          <v-flex fluid>
+            <h2 >Web application that helps clients find a fitted organizer for an event.</h2>
+          </v-flex>
+        </v-row>
+        <br>
+        <br>
         <v-row>
-          <carousel :per-page="7"  :mouse-drag="true"  >
-          <slide>      
-              <sliders  
-                v-bind:picture="require('@/assets/con1.jpg')"
-                v-bind:title="'CONCERT'"
-              ></sliders>
-          </slide>
-          <slide>
-                <sliders
-                v-bind:picture="require('@/assets/bday3.jpg')"
-                v-bind:title="'BIRTHDAY'"
-              ></sliders>
-          </slide>           
-          
+          <carousel :per-page="7" :mouse-drag="true">
             <slide>
-                <sliders
-                v-bind:picture="require('@/assets/wedf.jpg')"
-                v-bind:title="'WEDDING'"
-              ></sliders>
-          </slide>           
-      
+              <sliders v-bind:picture="require('@/assets/con1.jpg')" v-bind:title="'CONCERT'"></sliders>
+            </slide>
             <slide>
-          
-                <sliders
-                v-bind:picture="require('@/assets/birthday.jpg')"
-                v-bind:title="'BIRTHDAY'"
-              ></sliders>
-          </slide>
-          <slide>
-                <sliders
-                v-bind:picture="require('@/assets/con4.jpg')"
-                v-bind:title="'CONCERT'"
-              ></sliders>
-          </slide>           
-      
-            <slide>
-                <sliders
-                v-bind:picture="require('@/assets/wedv2.jpg')"
-                v-bind:title="'WEDDING'"
-              ></sliders>
-          </slide>           
-      
-            <slide>
-                <sliders
-                v-bind:picture="require('@/assets/birthday1.jpg')"
-                v-bind:title="'BIRTHDAY'"
-              ></sliders>
-          </slide>           
-          
-            <slide>
-                <sliders
-                v-bind:picture="require('@/assets/wedv1.jpg')"
-                v-bind:title="'WEDDING'"
-              ></sliders>
-          </slide> 
-          <slide>
-                <sliders
-                v-bind:picture="require('@/assets/wedv2.jpg')"
-                v-bind:title="'WEDDING'"
-              ></sliders>
-          </slide>     
+              <sliders v-bind:picture="require('@/assets/bday3.jpg')" v-bind:title="'BIRTHDAY'"></sliders>
+            </slide>
 
+            <slide>
+              <sliders v-bind:picture="require('@/assets/wedf.jpg')" v-bind:title="'WEDDING'"></sliders>
+            </slide>
 
+            <slide>
+              <sliders v-bind:picture="require('@/assets/birthday.jpg')" v-bind:title="'BIRTHDAY'"></sliders>
+            </slide>
+            <slide>
+              <sliders v-bind:picture="require('@/assets/con4.jpg')" v-bind:title="'CONCERT'"></sliders>
+            </slide>
 
-           
-          <slide>
+            <slide>
+              <sliders v-bind:picture="require('@/assets/wedv2.jpg')" v-bind:title="'WEDDING'"></sliders>
+            </slide>
 
-          </slide>
+            <slide>
+              <sliders v-bind:picture="require('@/assets/birthday1.jpg')" v-bind:title="'BIRTHDAY'"></sliders>
+            </slide>
+
+            <slide>
+              <sliders v-bind:picture="require('@/assets/wedv1.jpg')" v-bind:title="'WEDDING'"></sliders>
+            </slide>
+            <slide>
+              <sliders v-bind:picture="require('@/assets/wedv2.jpg')" v-bind:title="'WEDDING'"></sliders>
+            </slide>
+
+            <slide></slide>
           </carousel>
         </v-row>
         <hr>
@@ -203,7 +174,7 @@
                 <h4>Music touches us emotionally where words cant!</h4>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-img  id="img" src="../assets/con4.jpg"></v-img>
+                <v-img id="img" src="../assets/con4.jpg"></v-img>
               </v-col>
             </v-row>
           </v-container>
@@ -278,9 +249,27 @@
           </v-container>
         </template>
         <v-row>
-          <v-card>
-            <v-btn v-on:click="developer()">developers</v-btn>
-          </v-card>
+          <template>
+            <v-footer dark padless>
+              <v-card flat tile class="cyan darken-1  white--text text-center">
+                <v-card-text>
+                              <v-btn id="devs" v-on:click="developer()">developers</v-btn>
+
+                </v-card-text>
+
+                <v-card-text
+                  class="white--text pt-2"
+                >WeOrg is a web application that is developed by the 4 scholars of Passerelles Numeriques Philippines. This is to aids the Organizer from the the different fields of events to accommodate clients to eliminate time and effort to find for clients. Clients has the highest benefit since it would be easy for them to acquire different services in a much easier way.</v-card-text>
+
+                <v-divider></v-divider>
+
+                <v-card-text class="white--text">
+                  {{ new Date().getFullYear() }} —
+                  <strong>WeOrg!</strong>
+                </v-card-text>
+              </v-card>
+            </v-footer>
+          </template>
         </v-row>
       </v-container>
     </div>
@@ -292,8 +281,7 @@ import topNav from "../views/topNav.vue";
 import sliders from "../components/slider.vue";
 
 export default {
- 
-
+  
   methods: {
     Concert() {
       this.$router.push({ path: "Concert" });
@@ -316,7 +304,6 @@ export default {
     sliders
   }
 };
-
 </script>
 
 
@@ -357,9 +344,26 @@ h4 {
   background-image: url("../assets/bg.jpg");
   background-size: cover;
 }
-#img{
+#img {
   height: 350px;
   width: 600px;
 }
-
+h1 {
+  font-style: italic;
+  font-size: 30px;
+  color: whitesmoke;
+}
+p {
+  text-align: center;
+  font-size: 24px;
+  color: whitesmoke;
+}
+h2{
+  font-size: 25px;
+  color: whitesmoke;
+  text-align:center
+}
+#devs{
+  background-color: #0288D1;
+}
 </style>

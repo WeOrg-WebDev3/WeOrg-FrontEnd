@@ -30,7 +30,7 @@ export default {
 
 <style scoped>
   v-row{
-    background-color:aqua;
+    background-color:#1E88E5;
   }
 
   #image{

@@ -32,7 +32,7 @@
               v-bind:picture="require('@/assets/mellyne.jpg')"
               v-bind:name="'Mellyne Grace Nadela'"
               v-bind:description="'Project Developer'"
-              v-bind:info ="'Trust and Believe in Yourself, cause no one else will.'"
+              v-bind:info ="'Trust and Believe in Yourself, because no one else will.'"
             ></dev>
             </v-col>
             <v-col>
