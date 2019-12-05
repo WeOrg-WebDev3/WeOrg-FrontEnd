@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <topNavUser/>
+    <topNavUser />
     <div id="bg">
       <v-container fluid>
         <v-row dense>
@@ -12,34 +12,34 @@
                 src="../assets/cons.jpg"
                 style="height:220px;width:200px;possition:relative;margin-top:-10%;margin-left:42.5%"
               ></v-img>
-              <br>
+              <br />
               <center>
                 <h1>{{orgs[0].name}}</h1>
               </center>
-              <hr>
+              <hr />
               <h2 style="margin-left:50px">Personal Information</h2>
-              <br>
+              <br />
               <div style="margin-left:20px">
                 <v-icon>mdi-map-marker</v-icon>
                 <span>{{orgs[0].address}}</span>
-                <br>
+                <br />
                 <v-icon>mdi-email</v-icon>
                 <span>{{orgs[0].email}}</span>
-                <br>
+                <br />
                 <v-icon>mdi-cellphone-iphone</v-icon>
                 <span>{{orgs[0].contact}}</span>
-                <br>
+                <br />
 
                 <v-icon>mdi-calendar-today</v-icon>
 
                 <span>{{orgs[0].event}}</span>
-                <br>
+                <br />
                 <v-icon>mdi-cash</v-icon>
                 <span>{{orgs[0].price}}</span>
-                <br>
+                <br />
                 <v-icon>mdi-gift</v-icon>
                 <span>{{orgs[0].packages}}</span>
-                <br>
+                <br />
               </div>
 
               <template>
@@ -195,7 +195,7 @@ export default {
     var orgs = [];
     let id = sessionStorage.getItem("orgId");
     this.axios
-      .post(`http://localhost:8002/retriveprofile/${id}`)
+      .post(`http://localhost:8001/retriveprofile/${id}`)
       .then(response => {
         console.log(response);
         var dataT = response.data;
