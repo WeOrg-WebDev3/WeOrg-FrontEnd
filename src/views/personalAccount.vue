@@ -106,17 +106,11 @@
                           </v-card-text>
                           <v-card-actions>
                             <v-spacer></v-spacer>
+                            <v-btn @click="dialog = false" width="30%">Close</v-btn>
                             <v-btn
-                              color="blue darken-1"
-                              text
-                              @click="dialog = false"
-                              width="50%"
-                            >Close</v-btn>
-                            <v-btn
-                              color="blue darken-1"
-                              text
                               @click="dialog = false,saveEdit()"
-                              width="50%"
+                              :disabled="!isComplete"
+                              width="30%"
                             >Save</v-btn>
                           </v-card-actions>
                         </v-card>
@@ -124,13 +118,6 @@
                     </v-row>
                   </template>
                 </v-card-actions>
-                <v-container fluid style="width:70%">
-                  <v-data-table :headers="headers" :items="inquery">
-                    <template v-slot:item.action="{ item }">
-                      <v-btn @click="deleteInq(inquery[0].name)">Delete</v-btn>
-                    </template>
-                  </v-data-table>
-                </v-container>
               </div>
             </v-card>
           </v-col>
@@ -138,49 +125,59 @@
       </v-container>
 
       <hr />
-
       <template>
-        <div>
-          <v-row style="width:90%;margin-left:5%;margin-right:5%;margin-top:5%">
-            <v-col>
-              <v-card>
-                <v-container fluid>
-                  <h2 id="porfolio">My Porfolio</h2>
-                  <v-row>
-                    <v-file-input label="Documentation" type="file" required></v-file-input>
-                    <br />
-                    <v-btn @click="addPhoto()" color="primary" style="width:50%">Add Photo</v-btn>
-                    <v-col v-for="n in 9" :key="n" class="d-flex child-flex" cols="4">
-                      <v-card flat tile class="d-flex">
-                        <v-img>
-                          <template v-slot:placeholder>
-                            <v-row class="fill-height ma-0" align="center" justify="center">
-                              <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                            </v-row>
-                          </template>
-                        </v-img>
-                      </v-card>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card>
-            </v-col>
-          </v-row>
-        </div>
+        <v-btn @click="viewPorfolio">Show Photos</v-btn>
+       <v-row>
+         <v-col cols="12" sm="6" offset-sm="3">
+           <v-card>
+            <v-container fluid>
+             
+              <v-col v-for="(image, imageIndex) in photosPorfolio" :key="imageIndex">
+                <v-card flat tile class="d-flex">
+                  <v-img
+                    @click="index = imageIndex"
+                    :src="`http://localhost:8002/files/${image}`"
+                    :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+                    aspect-ratio="1"
+                    class="grey lighten-2"
+                  >
+                    <template v-slot:placeholder>
+                      <v-row class="fill-height ma-0" align="center" justify="center">
+                        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                      </v-row>
+                    </template>
+                  </v-img>
+                </v-card>
+              </v-col>
+            </v-container>
+           </v-card>
+         </v-col>        
+       </v-row>
       </template>
     </div>
+
+    <template>
+      <v-container fluid>
+        <v-row></v-row>
+        <v-file-input v-model="addrandomphoto" label="Documentation" type="file" required></v-file-input>
+        <br />
+        <v-btn @click="addPhoto()" color="primary" style="width:20%">Add Photo</v-btn>
+      </v-container>
+    </template>
   </div>
 </template>
 
-    
 <script>
+// import VueGallery from "vue-gallery";
 export default {
   name: "personal",
   data() {
     return {
       orgs: {},
       inquery: [],
-
+      photosPorfolio: [],
+      addrandomphoto: [],
+      index: null,
       dialog: false,
       valid: true,
       ename: "",
@@ -188,13 +185,16 @@ export default {
       econtact: "",
       numberRules: [
         v => !!v || "Contact Number is required",
-        v => (v && v.length <= 11) || "Name must be less  11 numbers",
-        v => (v && v.length >= 11) || "Name must be less  11 numbers"
+        v =>
+          (v && v.length <= 11) ||
+          "Your Contact number is invalid it should be 11 numbers",
+        v =>
+          (v && v.length >= 11) ||
+          "Your Contact number is invalid it should be 11 numbers"
       ],
       epackages: "",
       packageRules: [v => !!v || "Package is important"],
 
-      
       eventRules: [
         v => !!v || "Event is required",
         v =>
@@ -208,6 +208,7 @@ export default {
       ],
       eprice: "",
       eaddress: "",
+
       headers: [
         {
           text: "Name",
@@ -239,7 +240,7 @@ export default {
         contact: this.econtact,
         event: this.eevent,
         price: this.eprice,
-        package: this.epackages
+        packages: this.epackages
       };
       this.axios
         .put(`http://localhost:8002/Update/${id}`, editCred)
@@ -279,54 +280,83 @@ export default {
     },
     addPhoto() {
       let id = sessionStorage.getItem("id");
-   
+      let data = this.addrandomphoto;
+      alert(id);
+      console.log(data);
       let uploads = new FormData();
-
+      uploads.append("img", this.addrandomphoto);
       this.axios
-        .post(`http://localhost:8002/retrivephoto/${id}`, uploads, {
+        .post("http://localhost:8002/addporfolio/" + id, uploads, {
           headers: { "Content-Type": "multipart/form-data" }
         })
         .then(response => {
-          console.log(response.data.randomphoto, "dhkjash");
+          console.log(response);
         })
         .catch(error => {
           console.log(error);
         });
     },
     deleteInq(Iemail) {
-     
       this.axios
         .delete("http://localhost:8002/deleteInquiry/" + Iemail)
         .then(response => {
-
-          const index = this.inquery.indexOf(Iemail)
-        confirm('Are you sure you want to delete this inquiry?') && this.inquery.splice(index, 1)
+          const index = this.inquery.indexOf(Iemail);
+          confirm("Are you sure you want to delete this inquiry?") &&
+            this.inquery.splice(index, 1);
           console.log(Iemail, "dhkjash");
         })
         .catch(error => {
           console.log(error);
         });
+      console.log(response);
+    },
+    viewPorfolio() {
+      // var
+      let id = sessionStorage.getItem("id");
+      this.axios
+        .post(`http://localhost:8002/retriveprofile/${id}`)
+        .then(response => {
+          var dataT = response.data.randomphoto;
+          console.log(dataT, "shdjhs");
+          this.photosPorfolio = dataT;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+      return this.photosPorfolio;
     },
     getData() {
-      var orgs = [];
-     
-    let id = sessionStorage.getItem("id");
-    this.axios
-      .post(`http://localhost:8002/retriveprofile/${id}`)
-      .then(response => {
-        console.log(response.data);
-        var dataT = response.data;
-        this.orgs = dataT;
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      let id = sessionStorage.getItem("id");
+      this.axios
+        .post(`http://localhost:8002/retriveprofile/${id}`)
+        .then(response => {
+          console.log(response.data);
+          var dataT = response.data;
+          this.orgs = dataT;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   },
-  components: {},
+  components: {
+    // gallery: VueGallery
+  },
   created() {
     window.addEventListener("getData", this.getData);
     this.getData();
+  },
+  computed: {
+    isComplete() {
+      return (
+        this.ename &&
+        this.eaddress &&
+        this.econtact &&
+        this.eprice &&
+        this.epackages
+      );
+    }
   }
 };
 </script>
@@ -388,6 +418,12 @@ img {
   bottom: 0;
   background-image: url("../assets/bg.jpg");
   background-size: cover;
+}
+.image {
+  width: 50%;
+  height: 100%;
+  border: 1px solid #ebebeb;
+  margin: 5px;
 }
 </style>
  

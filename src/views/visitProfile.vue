@@ -1,16 +1,17 @@
 
 <template>
-  <div>
+  <div id="bg">
     <topNavUser />
-    <div id="bg">
-      <v-container fluid>
+    <div >
+      <v-container fluid style="width:50%">
         <v-row dense>
           <v-col cols="6" sm="12">
             <v-card>
               <v-img src="../assets/wed.png" class="white--text align-end" height="300px"></v-img>
                        <v-img
                 :src="`http://localhost:8002/files/${orgs[0].img}`"
-                style="height:220px;width:200px;possition:relative;margin-top:-10%;margin-left:42.5%"
+                class="center"
+                style="height:220px;width:200px;possition:relative;margin-top:-10%;"
               ></v-img>
               <br />
               <center>
@@ -46,7 +47,7 @@
                 <v-row justify="center">
                   <v-dialog v-model="dialog" persistent max-width="630px">
                     <template v-slot:activator="{ on }">
-                      <v-btn color="primary" width="50%" dark v-on="on">Inquire</v-btn>
+                      <v-btn color="primary" width="30%" style="margin-left:65%;margin-bottom:2%" dark v-on="on">Inquire</v-btn>
                     </template>
                     <template>
                       <v-card class="elevation-12">
@@ -164,7 +165,7 @@ export default {
   methods: {
     addInquery() {
       let id = sessionStorage.getItem("orgId");
-      alert(id)
+      
       let inquer = {
         name:this.iname,
         address:this.iaddress,
@@ -278,6 +279,12 @@ img {
   bottom: 0;
   background-image: url("../assets/bg.jpg");
   background-size: cover;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 </style>
  

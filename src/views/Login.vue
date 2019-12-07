@@ -69,7 +69,7 @@ export default {
     ]
   }),
   methods: {
-    login() {
+     login() {
       axios
         .post("http://localhost:8002/signin", {
           email: this.email,
