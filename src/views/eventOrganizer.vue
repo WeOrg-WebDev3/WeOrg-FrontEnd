@@ -12,7 +12,7 @@
         
         <v-data-table :headers="headers" :items="org" :search="search">
           <template v-slot:item.action="{ item }">
-            <v-btn @click="retrieveOrg(item.id)">View Profile</v-btn>
+            <v-btn @click="retrieveOrg(item.id,item.email)">View Profile</v-btn>
           </template>
         </v-data-table>
          </v-card>
@@ -38,6 +38,7 @@ export default {
         },
         { text: "Address", value: "address", sortable: false },
         { text: "Contact", value: "contact", sortable: false },
+         { text: "Email", value: "email", sortable: false },
         { text: "Action", value: "action", sortable: false }
       ]
     };
@@ -69,7 +70,7 @@ export default {
               name: dataT[counter].name,
               address: dataT[counter].address,
               contact: dataT[counter].contact,
-              event: dataT[counter].event,
+              email: dataT[counter].email,
               id: dataT[counter]._id
             });
           }
@@ -82,8 +83,9 @@ export default {
 
       return org;
     },
-    retrieveOrg(item) {
+    retrieveOrg(item,email) {
       this.$router.push({ path: "visitProfile" });
+      sessionStorage.setItem("orgEmail",email)
       sessionStorage.setItem("orgId", item);
     }
   },

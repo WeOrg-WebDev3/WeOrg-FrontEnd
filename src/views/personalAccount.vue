@@ -85,7 +85,7 @@
 
                                 <v-text-field
                                   v-model="eprice"
-                                  label="Fee Range"
+                                  label="Estimated Fee"
                                   type="number"
                                   min="1"
                                   required
@@ -130,28 +130,7 @@
       <hr>
       <template>
         <v-container fluid style="width:100%">
-          <!-- <v-row>
-            <v-col >
-              <v-card>
-                <v-col v-for="(image, imageIndex) in orgs.randomphoto" :key="imageIndex" cols="12" sm="3" offset-sm="3">
-                  <v-card flat tile class="d-flex">
-                    <v-img
-                      @click="index = imageIndex"
-                      :src="`http://localhost:8002/files/${image}`"
-                      aspect-ratio="1"
-                      class="grey lighten-2"
-                    >
-                      <template v-slot:placeholder>
-                        <v-row class="fill-height ma-0" align="center" justify="center">
-                          <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                        </v-row>
-                      </template>
-                    </v-img>
-                  </v-card>
-                </v-col>
-              </v-card>
-            </v-col>
-          </v-row>-->
+         
           <v-row>
             <v-col cols="12" sm="10" offset-sm="1">
               <v-card>

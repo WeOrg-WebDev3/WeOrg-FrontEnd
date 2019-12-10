@@ -33,7 +33,7 @@
                         required
                       ></v-text-field>
                       <v-select v-model="event" :items="items" filled label="Events" outlined></v-select>
-                      <v-text-field v-model="price" label="Price" type="number" min="1" required></v-text-field>
+                      <v-text-field v-model="price" label="Estimated Fee" type="number" min="1" required></v-text-field>
                       <v-text-field
                         v-model="packages"
                         :rules="packageRules"

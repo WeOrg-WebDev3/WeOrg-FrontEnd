@@ -3,7 +3,7 @@
   <div id="bg">
     <topNavUser />
     <div >
-      <v-container fluid style="width:50%">
+      <v-container fluid style="width:70%">
         <v-row dense>
           <v-col cols="6" sm="12">
             <v-card>
@@ -107,36 +107,46 @@
         </v-row>
       </v-container>
     </div>
-
-     <template>
-        <v-btn @click="viewPorfolio">Show Photos</v-btn>
-       <v-row>
-         <v-col cols="12" sm="6" offset-sm="3">
-           <v-card>
-            <v-container fluid>
-             
-              <v-col v-for="(image, imageIndex) in orgporfolio" :key="imageIndex">
-                <v-card flat tile class="d-flex">
-                  <v-img
-                    @click="index = imageIndex"
-                    :src="`http://localhost:8002/files/${image}`"
+    <template>
+        <v-container fluid style="width:100%">
+          <center><v-btn @click="viewPorfolio" style="width:30%;display:block" id="show"> Show Photos</v-btn></center> 
+         
+          <v-row>
+            <v-col cols="12" sm="10" offset-sm="1">
+              <v-card>
+                <v-container fluid style="width:100%">
+                  <v-row>
+                    <v-col
+                     v-for="(image, imageIndex) in orgporfolio" :key="imageIndex"
+                      class="d-flex child-flex"
+                      cols="3"
+                    >
+                      <v-card flat tile class="d-flex">
+                         <v-img
+                      @click="index = imageIndex"
+                      :src="`http://localhost:8002/files/${image}`"
+                      aspect-ratio="1"
+                      class="grey lighten-2"
+                    >
+                      <template v-slot:placeholder>
+                        <v-row class="fill-height ma-0" align="center" justify="center">
+                          <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                        </v-row>
+                      </template>
+                    </v-img>
                     
-                    aspect-ratio="1"
-                    class="grey lighten-2"
-                  >
-                    <template v-slot:placeholder>
-                      <v-row class="fill-height ma-0" align="center" justify="center">
-                        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                      </v-row>
-                    </template>
-                  </v-img>
-                </v-card>
-              </v-col>
-            </v-container>
-           </v-card>
-         </v-col>        
-       </v-row>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-container>
+               
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
       </template>
+
+    
   </div>
 </template>
 <script>
@@ -171,16 +181,17 @@ export default {
   methods: {
     addInquery() {
       let id = sessionStorage.getItem("orgId");
+      let orgemail = sessionStorage.getItem("orgEmail")
       
       let inquer = {
         name:this.iname,
         address:this.iaddress,
-        email:this.iemail,
+        email:orgemail,
         contact:this.icontact,
         message:this.imessage
       }
       this.axios
-        .post(`http://localhost:8002/retriveinquiries/${id}`,inquer)
+        .post(`http://localhost:8002/addinquiry/${id}`,inquer)
         .then(response => {
           console.log(response);
           
@@ -193,6 +204,7 @@ export default {
      
     },
     viewPorfolio(){
+     
       let id = sessionStorage.getItem("orgId");
       this.axios
         .post(`http://localhost:8002/retriveprofile/${id}`)
@@ -211,6 +223,7 @@ export default {
       
        
         return this.orgporfolio;
+         
 
     }
   },
