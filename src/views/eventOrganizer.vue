@@ -1,30 +1,34 @@
 <template>
-<div id="bg"> 
-<topNav/>
-<div >
-  <v-container fluid style="width:70%">
-    <center><h2>{{org[0].event}} Organizers</h2></center>
-    <v-data-table :headers="headers" :items="org">
-      <template v-slot:item.action="{ item }">
+  <div id="bg">
+    <topNav/>
+    <div>
+      <v-container fluid style="width:70%">
+         <v-card fluid>
+            <v-card-title>
+           {{org[0].event}} Organizers
+            <v-spacer></v-spacer>
+            <v-text-field v-model="search" label="Search" single-line hide-details></v-text-field>
+          </v-card-title>
         
-     
-      <v-btn @click="retrieveOrg(item.id)">View Profile</v-btn>
-     
-    </template>
-    </v-data-table>
-  </v-container>
-
-  </div>
+        <v-data-table :headers="headers" :items="org" :search="search">
+          <template v-slot:item.action="{ item }">
+            <v-btn @click="retrieveOrg(item.id)">View Profile</v-btn>
+          </template>
+        </v-data-table>
+         </v-card>
+      </v-container>
+    </div>
   </div>
 </template>
 
 
 <script>
-import topNav from "../views/topNav"
+import topNav from "../views/topNav";
 export default {
   data() {
     return {
       org: [],
+      search:"",
       headers: [
         {
           text: "Name",
@@ -32,9 +36,9 @@ export default {
           sortable: false,
           value: "name"
         },
-        { text: "Address", value: "address",sortable: false, },
-        { text: "Contact", value: "contact",sortable: false, },
-        { text: "Action", value: "action" ,sortable: false,}
+        { text: "Address", value: "address", sortable: false },
+        { text: "Contact", value: "contact", sortable: false },
+        { text: "Action", value: "action", sortable: false }
       ]
     };
   },
@@ -42,12 +46,21 @@ export default {
   methods: {
     addOrg() {
       var org = [];
-      let event=sessionStorage.getItem("orgEvent");
+      let event = sessionStorage.getItem("orgEvent");
       this.axios
-        .get("http://localhost:8002/retrieveOneEvent/"+ event)
+        .get("http://localhost:8002/retrieveOneEvent/" + event)
         .then(response => {
-          console.log(response);
           var dataT = response.data;
+          console.log(dataT, "Tghisi is");
+          for (let i = dataT.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            let temp = dataT[i];
+            dataT[i] = dataT[j];
+            dataT[j] = temp;
+          }
+
+          console.log(dataT, "Random");
+
           // this.org = dataT
           var counter = 0;
 
@@ -57,7 +70,7 @@ export default {
               address: dataT[counter].address,
               contact: dataT[counter].contact,
               event: dataT[counter].event,
-              id:dataT[counter]._id
+              id: dataT[counter]._id
             });
           }
           console.log(org);
@@ -69,20 +82,17 @@ export default {
 
       return org;
     },
-    retrieveOrg(item){
-     this.$router.push({ path: "visitProfile" });
-    sessionStorage.setItem("orgId", item);
-    
-     
-      
-      
+    retrieveOrg(item) {
+      this.$router.push({ path: "visitProfile" });
+      sessionStorage.setItem("orgId", item);
     }
   },
-   mounted() {
-      this.addOrg();
-    },components:{
-      topNav
-    }
+  mounted() {
+    this.addOrg();
+  },
+  components: {
+    topNav
+  }
 };
 </script>
 <style scoped>

@@ -18,6 +18,7 @@
       </v-container>
     </div>
   </div>
+  
 </template>
 <script>
 import topNav from "../views/topNav.vue";
@@ -36,7 +37,6 @@ export default {
     };
   },
   methods: {
-
     retrieveOrg(item) {
       this.$router.push({ path: "visitProfile" });
       sessionStorage.setItem("orgId", item);
@@ -51,6 +51,14 @@ export default {
       .then(response => {
         console.log(response);
         var dataT = response.data;
+        for (let i = dataT.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1));
+          let temp = dataT[i];
+          dataT[i] = dataT[j];
+          dataT[j] = temp;
+        }
+
+        console.log(dataT, "Random");
         var counter = 0;
 
         for (counter; counter < dataT.length; counter++) {
@@ -59,7 +67,7 @@ export default {
             address: dataT[counter].address,
             contact: dataT[counter].contact,
             event: dataT[counter].event,
-            id:dataT[counter]._id
+            id: dataT[counter]._id
           });
         }
 

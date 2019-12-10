@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import Landing from "../components/Landing.vue";
 import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
-import viewPorfolio from "../views/viewPorfolio.vue";
+
 import personalAccount from "../views/personalAccount.vue";
 import eventOrganizer from "../views/eventOrganizer.vue";
 
@@ -17,12 +17,26 @@ const routes = [
   {
     path: "/Home",
     name: "home",
-    component: Landing
+    component: Landing,
+    beforeEnter: ((from, to, next) => {
+      if (sessionStorage.getItem("token")) {
+        next("/personalAccount")
+      } else {
+        next()
+      }
+    })
   },
   {
     path: "/",
     name: "home",
-    component: Landing
+    component: Landing,
+    beforeEnter: ((from, to, next) => {
+      if (sessionStorage.getItem("token")) {
+        next("/personalAccount")
+      } else {
+        next()
+      }
+    })
   },
   {
     path: "/About",
@@ -32,42 +46,75 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue")
-  },{
+  }, {
     path: "/Login",
     name: "login",
-    component: Login
+    component: Login,
+   
+   
   },
   {
     path: "/Signup",
     name: "signup",
-    component: Signup
+    component: Signup,
+    beforeEnter: ((from, to, next) => {
+      if (sessionStorage.getItem("token")) {
+        next("/personalAccount")
+      } else {
+        next()
+      }
+    })
   },
+
   {
-    path: "/ViewPorfolio",
-    name: "viewPorfolio",
-    component: viewPorfolio
-  },
-  {
-    path: "/personalAccount", 
+    path: "/personalAccount",
     name: "personalAccount",
-    component: personalAccount
+    component: personalAccount,
+    beforeEnter: ((from, to, next) => {
+      if (sessionStorage.getItem("token") == null) {
+        next("/Login")
+      } else {
+        next()
+      }
+    })
   },
- 
+
   {
-    path: '/eventOrganizer', 
+    path: '/eventOrganizer',
     name: 'eventOrganizer',
-    component: eventOrganizer
+    component: eventOrganizer,
+    beforeEnter: ((from, to, next) => {
+      if (sessionStorage.getItem("token") ) {
+        next("/personalAccount")
+      } else {
+        next()
+      }
+    })
   }, {
     path: "/visitProfile",
     name: "visitProfile",
-    component: visitProfile
+    component: visitProfile,beforeEnter: ((from, to, next) => {
+      if (sessionStorage.getItem("token") ) {
+        next("/personalAccount")
+      } else {
+        next()
+      }
+    })
+    
   },
   {
     path: "/search",
     name: "search",
-    component: Search
+    component: Search,
+    beforeEnter: ((from, to, next) => {
+      if (sessionStorage.getItem("token") ) {
+        next("/personalAccount")
+      } else {
+        next()
+      }
+    })
   },
-  
+
 ];
 
 const router = new VueRouter({

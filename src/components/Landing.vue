@@ -13,7 +13,7 @@
               <v-card-actions>
                 <v-btn color="primary" @click="goto('Wedding')">Visit</v-btn>
                 <p
-                  style="text-align:center;margin-left:30px;font-size:24px;margin-top:10px"
+                  style="text-align:center;margin-left:30px;font-size:24px;margin-top:10px;color:blue"
                 >Organizers of this Event</p>
                 <v-spacer></v-spacer>
               </v-card-actions>
@@ -27,7 +27,7 @@
               <v-card-actions>
                 <v-btn  @click="goto('Concert')" color="primary">Visit</v-btn>
                 <p
-                  style="text-align:center;margin-left:20px;font-size:24px;margin-top:10px"
+                  style="text-align:center;margin-left:20px;font-size:24px;margin-top:10px;color:blue"
                 >Organizers of this Event</p>
               </v-card-actions>
             </v-card>
@@ -40,7 +40,7 @@
               <v-card-actions>
                 <v-btn color="primary"  @click="goto('Birthday')">Visit</v-btn>
                 <p
-                  style="text-align:center;margin-left:20px;font-size:24px;margin-top:10px"
+                  style="text-align:center;margin-left:20px;font-size:24px;margin-top:10px;color:blue"
                 >Organizers of this Event</p>
                 <v-spacer></v-spacer>
               </v-card-actions>
@@ -249,27 +249,7 @@
           </v-container>
         </template>
         <v-row>
-          <template>
-            <v-footer dark padless>
-              <v-card flat tile class="cyan darken-1  white--text text-center">
-                <v-card-text>
-                              <v-btn id="devs" v-on:click="developer()">developers</v-btn>
-
-                </v-card-text>
-
-                <v-card-text
-                  class="white--text pt-2"
-                >WeOrg is a web application that is developed by four scholars of Passerelles Numeriques Philippines. This is to aids the Organizer from the the different fields of events to accommodate clients to eliminate time and effort to find for clients. Clients has the highest benefit since it would be easy for them to acquire different services in a much easier way.</v-card-text>
-
-                <v-divider></v-divider>
-
-                <v-card-text class="white--text">
-                  {{ new Date().getFullYear() }} —
-                  <strong>WeOrg!</strong>
-                </v-card-text>
-              </v-card>
-            </v-footer>
-          </template>
+        
         </v-row>
       </v-container>
     </div>
@@ -282,15 +262,25 @@ import sliders from "../components/slider.vue";
 export default {
   
   methods: {
+    data(){
+         return{
+            name:"Landing"
+            
+  
+
+
+      }
+    },
+
+
+
     goto(event) {
       sessionStorage.setItem("orgEvent", event);
     
       this.$router.push({ path: "eventOrganizer" });
     },
     
-    developer() {
-      this.$router.push({ path: "about" });
-    }
+   
   },
   components: {
     topNav,

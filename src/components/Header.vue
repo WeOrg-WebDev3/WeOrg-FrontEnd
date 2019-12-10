@@ -3,7 +3,7 @@
     <v-system-bar color="#00C9FFD1" height="250%"></v-system-bar>
     <div>
 
-      <v-img src="../assets/logoWeoRg.png" style="height:20%;width:20%;position:relative;margin-top:-16%;margin-bottom:-2%"> </v-img>
+      <v-img src="../assets/logoWeoRg.png" style="height:20%;width:20%;position:relative;margin-top:-19%;margin-bottom:-2%"> </v-img>
     </div>
 
      

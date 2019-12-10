@@ -9,7 +9,7 @@
     </v-bottom-navigation>
 
     <div id="bg">
-      <v-container fluid>
+      <v-container fluid style="width:90%">
         <v-row dense>
           <v-col cols="6" sm="12">
             <v-card>
@@ -19,45 +19,40 @@
                 :src="`http://localhost:8002/files/${orgs.img}`"
                 style="height:220px;width:200px;possition:relative;margin-top:-10%;margin-left:42.5%"
               ></v-img>
-              <br />
+              <br>
               <center>
                 <h1>{{orgs.name}}</h1>
               </center>
-              <hr />
+              <hr>
               <h2 style="margin-left:50px">Personal Information</h2>
-              <br />
+              <br>
               <div style="margin-left:20px">
                 <v-icon>mdi-map-marker</v-icon>
                 <span>{{orgs.address}}</span>
-                <br />
+                <br>
                 <v-icon>mdi-email</v-icon>
                 <span>{{orgs.email}}</span>
-                <br />
+                <br>
                 <v-icon>mdi-cellphone-iphone</v-icon>
                 <span>{{orgs.contact}}</span>
-                <br />
+                <br>
 
                 <v-icon>mdi-calendar-today</v-icon>
 
                 <span>{{orgs.event}}</span>
-                <br />
+                <br>
                 <v-icon>mdi-cash</v-icon>
                 <span>{{orgs.price}}</span>
-                <br />
+                <br>
                 <v-icon>mdi-gift</v-icon>
                 <span>{{orgs.packages}}</span>
-                <br />
+                <br>
                 <v-card-actions>
                   <template>
                     <v-row justify="center">
                       <v-dialog v-model="dialog" persistent max-width="600px">
                         <template v-slot:activator="{ on }">
                           <v-btn color="primary" max-width="30%" dark v-on="on">Edit</v-btn>
-                          <v-btn
-                            color="primary"
-                            max-width="30%"
-                            v-on:click="viewInquires()"
-                          >View Inquires</v-btn>
                         </template>
                         <v-card>
                           <v-card-title>
@@ -124,46 +119,83 @@
         </v-row>
       </v-container>
 
-      <hr />
       <template>
-        <v-btn @click="viewPorfolio">Show Photos</v-btn>
-       <v-row>
-         <v-col cols="12" sm="6" offset-sm="3">
-           <v-card>
-            <v-container fluid>
-             
-              <v-col v-for="(image, imageIndex) in photosPorfolio" :key="imageIndex">
-                <v-card flat tile class="d-flex">
-                  <v-img
-                    @click="index = imageIndex"
-                    :src="`http://localhost:8002/files/${image}`"
-                    :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
-                    aspect-ratio="1"
-                    class="grey lighten-2"
-                  >
-                    <template v-slot:placeholder>
-                      <v-row class="fill-height ma-0" align="center" justify="center">
-                        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-                      </v-row>
-                    </template>
-                  </v-img>
-                </v-card>
-              </v-col>
-            </v-container>
-           </v-card>
-         </v-col>        
-       </v-row>
+        <v-container fluid style="width:70%;background-color:grey">
+          <v-data-table :headers="headers" :items="orgs.inquires" color="grey">
+            <template v-slot:item.action="{ item }"></template>
+          </v-data-table>
+        </v-container>
+      </template>
+      <br>
+      <hr>
+      <template>
+        <v-container fluid style="width:100%">
+          <!-- <v-row>
+            <v-col >
+              <v-card>
+                <v-col v-for="(image, imageIndex) in orgs.randomphoto" :key="imageIndex" cols="12" sm="3" offset-sm="3">
+                  <v-card flat tile class="d-flex">
+                    <v-img
+                      @click="index = imageIndex"
+                      :src="`http://localhost:8002/files/${image}`"
+                      aspect-ratio="1"
+                      class="grey lighten-2"
+                    >
+                      <template v-slot:placeholder>
+                        <v-row class="fill-height ma-0" align="center" justify="center">
+                          <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                        </v-row>
+                      </template>
+                    </v-img>
+                  </v-card>
+                </v-col>
+              </v-card>
+            </v-col>
+          </v-row>-->
+          <v-row>
+            <v-col cols="12" sm="10" offset-sm="1">
+              <v-card>
+                <v-container fluid style="width:100%">
+                  <v-row>
+                    <v-col
+                      v-for="(image, imageIndex) in orgs.randomphoto"
+                      :key="imageIndex"
+                      class="d-flex child-flex"
+                      cols="3"
+                    >
+                      <v-card flat tile class="d-flex">
+                         <v-img
+                      @click="index = imageIndex"
+                      :src="`http://localhost:8002/files/${image}`"
+                      aspect-ratio="1"
+                      class="grey lighten-2"
+                    >
+                      <template v-slot:placeholder>
+                        <v-row class="fill-height ma-0" align="center" justify="center">
+                          <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                        </v-row>
+                      </template>
+                    </v-img>
+                    
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-container>
+                <v-file-input v-model="addrandomphoto" label="Documentation" type="file" required></v-file-input>
+          <br>
+          <v-btn @click="addPhoto()" color="primary" style="width:20%">Add Photo</v-btn>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </template>
+
+      <template>
+        <v-container fluid style="width:50%">
+          
+        </v-container>
       </template>
     </div>
-
-    <template>
-      <v-container fluid>
-        <v-row></v-row>
-        <v-file-input v-model="addrandomphoto" label="Documentation" type="file" required></v-file-input>
-        <br />
-        <v-btn @click="addPhoto()" color="primary" style="width:20%">Add Photo</v-btn>
-      </v-container>
-    </template>
   </div>
 </template>
 
@@ -220,8 +252,7 @@ export default {
         { text: "Address", value: "address", sortable: false },
         { text: "Contact", value: "contact", sortable: false },
 
-        { text: "Message", value: "message", sortable: false },
-        { text: "Action", value: "action", sortable: false }
+        { text: "Message", value: "message", sortable: false }
       ]
     };
   },
@@ -229,6 +260,7 @@ export default {
   methods: {
     goto(link) {
       alert("Successfully Logout");
+      sessionStorage.removeItem("token");
       this.$router.push({ path: link });
     },
     saveEdit() {
@@ -238,7 +270,7 @@ export default {
         name: this.ename,
         address: this.eaddress,
         contact: this.econtact,
-        event: this.eevent,
+       
         price: this.eprice,
         packages: this.epackages
       };
@@ -281,7 +313,7 @@ export default {
     addPhoto() {
       let id = sessionStorage.getItem("id");
       let data = this.addrandomphoto;
-      alert(id);
+
       console.log(data);
       let uploads = new FormData();
       uploads.append("img", this.addrandomphoto);
@@ -291,6 +323,7 @@ export default {
         })
         .then(response => {
           console.log(response);
+          this.getData();
         })
         .catch(error => {
           console.log(error);
@@ -310,22 +343,7 @@ export default {
         });
       console.log(response);
     },
-    viewPorfolio() {
-      // var
-      let id = sessionStorage.getItem("id");
-      this.axios
-        .post(`http://localhost:8002/retriveprofile/${id}`)
-        .then(response => {
-          var dataT = response.data.randomphoto;
-          console.log(dataT, "shdjhs");
-          this.photosPorfolio = dataT;
-        })
-        .catch(error => {
-          console.log(error);
-        });
 
-      return this.photosPorfolio;
-    },
     getData() {
       let id = sessionStorage.getItem("id");
       this.axios
